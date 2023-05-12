@@ -5,10 +5,11 @@
 <meta name="description" content="Compare Solidly Forks - eliteness.network/compare-solidly : Powered by Guru Network 🦾,🚀">
 <meta name="keywords" content="Comparision, Solidly, Dex, Forks">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="https://ftm.guru/icons/64.png" />
+<link rel="shortcut icon" href="https://ftm.guru/icons/solidly.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 <style>
+
 
 /*
 @font-face{font-family:bold;src: url(https://ftm.guru/font/bold.ttf);}
@@ -106,8 +107,9 @@ html{
 #content1 u {
   text-decoration: dashed underline aqua
 }
-@media(min-width:641px) {
 
+table {
+  border-collapse: collapse;
 }
 
 table thead tr td a {
@@ -129,7 +131,25 @@ table tr td {
 	text-align:center;
 	min-width: 200px;
 }
+.view {
+  margin: auto;
+  width: 100%;
+}
 
+.wrapper {
+  position: relative;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+@media(min-width:641px) {
+  table  tr td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0px;
+    background: linear-gradient(to right, #d0f5f2, #90F7EC)
+  }
+}
 </style>
 <body>
 <div class="body" align="center">
@@ -141,119 +161,123 @@ table tr td {
 
 	<br><br><br>
 
-
-	<div class="" style="overflow:auto">
-		<table align="center">
-			<thead>
-				<tr id="sr-name">
-					<td>Metric \ DEX</td>
-				</tr>
-			</thead>
-			<tbody id="stage">
-
-
-				<tr id="sr-launch">
-					<td>Start of Epoch 1</td>
-					<td>2020 - Aug 12</td>
-					<td>2022 - Jun 2</td>
-					<td>2022 - Nov 23</td>
-					<td>2023 - Jan 13</td>
-					<td>2023 - </td>
-					<td>2023 - </td>
-					<td>2023 - </td>
-				</tr>
-
-				<tr id="sr-age">
-					<td>Age</td>
-					<td>142 Epochs</td>
-					<td>48 Epochs</td>
-					<td>25 Epochs</td>
-					<td>18 Epochs</td>
-					<td>13 Epochs</td>
-					<td>6 Epochs</td>
-					<td>1 Epochs</td>
-				</tr>
-				<tr id="sr-bcn">
-					<td>Blockchain Network</td>
-					<td><span id="bcn_1" value="Ethereum, Polygon, Optimism, Fantom, xDai, Arbitrum, Avalanche">7 Chains</span></td>
-					<td><span id="bcn_2">Optimism</span></td>
-					<td><span id="bcn_6">Fantom</span></td>
-					<td><span id="bcn_4">BS. Chain</span></td>
-					<td><span id="bcn_3">Arbitrum</span></td>
-					<td><span id="bcn_5">Kava</span></td>
-					<td><span id="bcn_5">Arbitrum</span></td>
-				</tr>
-
-				<tr id="sr-ticker">
-					<td>Ticker (Symbol)</td>
-				</tr>
-				<tr id="sr-price">
-					<td>Spot Trading Price</td>
-				</tr>
-				<tr id="sr-sup-cir">
-					<td>Circulating Supply</td>
-				</tr>
-				<tr id="sr-sup-dil">
-					<td>Fully Diluted Supply</td>
-				</tr>
-				<tr id="sr-mc-cir">
-					<td>Circulating Market Cap</td>
-				</tr>
-				<tr id="sr-mc-dil">
-					<td>Fully Diluted Valuation</td>
-				</tr>
-				<tr id="sr-vol-yday">
-					<td>Volumes: Registered Yesterday</td>
-				</tr>
-				<tr id="sr-vol-epoch-ong">
-					<td>Volumes: Curr. Epoch (Thu-Ystd)</td>
-				</tr>
-				<tr id="sr-vol-epoch-prev">
-					<td>Volumes: Prev. Epoch (Thu-Wed)</td>
-				</tr>
-				<tr id="sr-fee-yday">
-					<td>Fees: Registered Yesterday</td>
-				</tr>
-				<tr id="sr-fee-epoch-ong">
-					<td>Fees: Curr. Epoch (Thu-Ystd)</td>
-				</tr>
-				<tr id="sr-fee-epoch-prev">
-					<td>Fees: Prev. Epoch (Thu-Wed)</td>
-				</tr>
-				<tr id="sr-rev-yday">
-					<td>Holder Earnings: Registered Yesterday</td>
-				</tr>
-				<tr id="sr-rev-epoch-ong">
-					<td>Holder Earnings: Curr. Epoch (Thu-Ystd)</td>
-				</tr>
-				<tr id="sr-rev-epoch-prev">
-					<td>Holder Earnings: Prev. Epoch (Thu-Wed)</td>
-				</tr>
+	<div class="view">
+		<div class="wrapper">
+			<table align="center">
+				<thead>
+					<tr id="sr-name">
+						<td>Metric \ DEX</td>
+					</tr>
+				</thead>
+				<tbody id="stage">
 
 
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
-				<tr><td></td></tr>
+					<tr id="sr-launch">
+						<td>Start of Epoch 1</td>
+						<td>2020 - Aug 12</td>
+						<td>2022 - Jun 2</td>
+						<td>2022 - Nov 23</td>
+						<td>2023 - Jan 13</td>
+						<td>2023 - </td>
+						<td>2023 - </td>
+						<td>2023 - </td>
+					</tr>
 
-			</tbody>
-		</table>
+					<tr id="sr-age">
+						<td>Age</td>
+						<td>142 Epochs</td>
+						<td>48 Epochs</td>
+						<td>25 Epochs</td>
+						<td>18 Epochs</td>
+						<td>13 Epochs</td>
+						<td>6 Epochs</td>
+						<td>1 Epochs</td>
+					</tr>
+					<tr id="sr-bcn">
+						<td>Blockchain Network</td>
+						<td><span id="bcn_1" value="Ethereum, Polygon, Optimism, Fantom, xDai, Arbitrum, Avalanche">7 Chains</span></td>
+						<td><span id="bcn_2">Optimism</span></td>
+						<td><span id="bcn_6">Fantom</span></td>
+						<td><span id="bcn_4">BS. Chain</span></td>
+						<td><span id="bcn_3">Arbitrum</span></td>
+						<td><span id="bcn_5">Kava</span></td>
+						<td><span id="bcn_5">Arbitrum</span></td>
+					</tr>
+
+					<tr id="sr-ticker">
+						<td>Ticker (Symbol)</td>
+					</tr>
+					<tr id="sr-price">
+						<td>Spot Trading Price</td>
+					</tr>
+					<tr id="sr-sup-cir">
+						<td>Circulating Supply</td>
+					</tr>
+					<tr id="sr-sup-dil">
+						<td>Fully Diluted Supply</td>
+					</tr>
+					<tr id="sr-mc-cir">
+						<td>Circulating Market Cap</td>
+					</tr>
+					<tr id="sr-mc-dil">
+						<td>Fully Diluted Valuation</td>
+					</tr>
+					<tr id="sr-vol-yday">
+						<td>Volumes: Registered Yesterday</td>
+					</tr>
+					<tr id="sr-vol-epoch-ong">
+						<td>Volumes: Curr. Epoch (Thu-Ystd)</td>
+					</tr>
+					<tr id="sr-vol-epoch-prev">
+						<td>Volumes: Prev. Epoch (Thu-Wed)</td>
+					</tr>
+					<tr id="sr-fees-yday">
+						<td>Fees: Registered Yesterday</td>
+					</tr>
+					<tr id="sr-fees-epoch-ong">
+						<td>Fees: Curr. Epoch (Thu-Ystd)</td>
+					</tr>
+					<tr id="sr-fees-epoch-prev">
+						<td>Fees: Prev. Epoch (Thu-Wed)</td>
+					</tr>
+
+					<!--
+					<tr id="sr-rev-yday">
+						<td>veToken Holder's Earnings: Registered Yesterday</td>
+					</tr>
+					<tr id="sr-rev-epoch-ong">
+						<td>veToken Holder's Earnings: Curr. Epoch (Thu-Ystd)</td>
+					</tr>
+					<tr id="sr-rev-epoch-prev">
+						<td>veToken Holder's Earnings: Prev. Epoch (Thu-Wed)</td>
+					</tr>
+
+					-->
+
+
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+					<tr><td></td></tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
 
@@ -359,6 +383,29 @@ function fornum2(n,d)
 	return(n_);
 }
 
+function notice(c) {
+	window.location = "#note";
+	$("content1").innerHTML = c;
+}
+
+
+
+function arf(){
+	//o = INITIAL; c=0;
+	var xfr = setInterval(
+		function(){
+			//c++
+		},
+		500
+	)
+}
+
+
+
+
+
+
+
 async function dr() {
 	// STEP 0 : INITIALIZE
 
@@ -395,14 +442,38 @@ console.log(_cgd)
 
 	paint_basics();
 
-/*
-<td><span id="bcn_1" value="Ethereum, Polygon, Optimism, Fantom, xDai, Arbitrum, Avalanche">7 Chains</span></td>
-<td><span id="bcn_2">Optimism</span></td>
-<td><span id="bcn_3">Arbitrum</span></td>
-<td><span id="bcn_4">B. Smart Chain</span></td>
-<td><span id="bcn_5">Arbitrum</span></td>
-<td><span id="bcn_6">Fantom</span></td>
-*/
+	/// Maintain STATE Order!
+
+	_vol = await Promise.all([
+		fetch("https://api.llama.fi/summary/dexs/curve-dex?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/velodrome?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/equalizer-exchange?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/thena?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/ramses-exchange?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/equilibre?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/chronos?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+	]);
+
+	for(let i=0;i<_vol.length;i++) { STATE[i].volumes = await _vol[i].json(); }
+
+	paint_vols();
+
+
+	/// Maintain STATE Order!
+
+	_fee = await Promise.all([
+		fetch("https://api.llama.fi/summary/fees/curve-dex?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/velodrome?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/equalizer-exchange?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/thena?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/ramses-exchange?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/equilibre?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/chronos?dataType=dailyFees"),
+	]);
+
+	for(let i=0;i<_fee.length;i++) { STATE[i].fees = await _fee[i].json(); }
+
+	paint_fees();
 
 
 }
@@ -467,35 +538,128 @@ async function paint_basics(s) {
 	}
 }
 
-function notice(c) {
-	window.location = "#note";
-	$("content1").innerHTML = c;
+
+
+async function paint_vols(s) {
+
+	let _k = Object.keys(STATE);
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-vol-yday").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ STATE[ i ].volumes.total24h == null ? "0" : STATE[ i ].volumes.total24h.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+	}
+
+	// day of last data
+	let _dow = (new Date()).getDay();
+	// defillama doesnt have today's data
+	_dow--;
+/*
+D	GD	SI	FI		SI	FI
+su	0	0	3		4	10
+mo	1	0	4		5	11
+tu	2	0	5		6	12
+we	3	0	6		7	13
+th	4	0	0		1	7
+fr	5	0	1		2	8
+sa	6	0	2		3	9
+*/
+
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-vol-epoch-ong").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ totaller_ong(STATE[ i ].volumes.totalDataChart).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_cthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
+
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-vol-epoch-prev").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ totaller_prev(STATE[ i ].volumes.totalDataChart).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
+}
+
+async function paint_fees(s) {
+
+	let _k = Object.keys(STATE);
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-yday").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ STATE[ i ].fees.total24h == null ? "0" : STATE[ i ].fees.total24h.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+	}
+
+	// day of last data
+	let _dow = (new Date()).getDay();
+	// defillama doesnt have today's data
+	_dow--;
+/*
+D	GD	SI	FI		SI	FI
+su	0	0	3		4	10
+mo	1	0	4		5	11
+tu	2	0	5		6	12
+we	3	0	6		7	13
+th	4	0	0		1	7
+fr	5	0	1		2	8
+sa	6	0	2		3	9
+*/
+
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-epoch-ong").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ totaller_ong(STATE[ i ].fees.totalDataChart).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_cthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
+
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-epoch-prev").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ totaller_prev(STATE[ i ].fees.totalDataChart).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
+}
+
+function totaller_ong(ob) {
+	let _t=0;
+	let _dow = (new Date()).getDay(); _dow--;	// defillama doesnt have today's data
+	let _thu = _dow > 3 ? _dow-4 : _dow+3;
+	for(let _toi=0; _toi <= _thu ; _toi++ ) {
+		_t += ob[ ob.length - 1 - _toi ][1];
+	}
+	return _t;
+}
+function totaller_prev(ob) {
+	let _t=0;
+	let _dow = (new Date()).getDay(); _dow--;	// defillama doesnt have today's data
+	let _skip = _dow > 3 ? _dow-3 : _dow+4;
+	for(let _toi=_skip; _toi <= _skip+6 ; _toi++ ) {
+		_t += ob[ ob.length - 1 - _toi ][1];
+	}
+	return _t;
 }
 
 
 
-function arf(){
-	//o = INITIAL; c=0;
-	var xfr = setInterval(
-		function(){
-			//c++
-		},
-		500
-	)
-}
-
-async function prices() {
-
-	p = await (await fetch("https://api.coingecko.com/api/v3/simple/price?ids=curve-dao-token%2Cvelodrome-finance%2Cthena%2Cchronos-finance%2Cramses-exchange%2Cequalizer-dex%2Cequilibre&vs_currencies=usd")).json();
-
-
-	$("price_1").innerHTML = "<span>$" + p["curve-dao-token"].usd.toFixed(4) +"</span>";
-	$("price_2").innerHTML = "<span>$" + p["velodrome-finance"].usd.toFixed(4) +"</span>";
-	$("price_3").innerHTML = "<span>$" + p["chronos-finance"].usd.toFixed(4) +"</span>";
-	$("price_4").innerHTML = "<span>$" + p["thena"].usd.toFixed(4) +"</span>";
-	$("price_5").innerHTML = "<span>$" + p["ramses-exchange"].usd.toFixed(4) +"</span>";
-	$("price_6").innerHTML = "<span>$" + p["equalizer-dex"].usd.toFixed(4) +"</span>";
-
-}
 </script>
 </html>
