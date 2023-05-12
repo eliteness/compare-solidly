@@ -234,13 +234,21 @@ async function basetrip() {
 	OPTIMISM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/optimism");
 	FANTOM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/fantom");
 	BSC = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/bsc");
-	ARBITRUM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/arbitrum");
+	ARBITRUM = new ethers.providers.JsonRpcProvider("https://arbitrum.blockpi.network/v1/rpc/public");
 	KAVA = new ethers.providers.JsonRpcProvider("https://evm.kava.io");
 
 	cleanStage();
 
 	//dangerous recursion
-	try{ dr(); } catch(e){ console.log("dr: ",e); basetrip(); }
+	try{
+		await dr();
+	} catch(e) {
+		console.log("dr: ",e);
+		await cleanStage();
+		notice(`<h2>Something went wrong...</h2>Please refresh the page!`);
+		//await basetrip();
+
+	}
 	//main reason is that ankr's arb1 rpc and kava rpc are extremely unreliable
 }
 
@@ -374,6 +382,12 @@ async function cleanStage() {
 			<tr id="sr-mc-dil">
 				<td>Fully Diluted Valuation</td>
 			</tr>
+			<tr id="sr-vol-alltime">
+				<td>Volumes: All Time Total</td>
+			</tr>
+			<tr id="sr-vol-daily-avg">
+				<td>Volumes: Daily Average<br><span class="metricSub">Most recent 365-day average</span></td>
+			</tr>
 			<tr id="sr-vol-yday">
 				<td>Volumes: Registered Yesterday</td>
 			</tr>
@@ -382,6 +396,12 @@ async function cleanStage() {
 			</tr>
 			<tr id="sr-vol-epoch-prev">
 				<td>Volumes: Prev. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
+			</tr>
+			<tr id="sr-fees-alltime">
+				<td>Fees: All Time Total<br><span class="metricSub">Cummulative Total since launch</span></td>
+			</tr>
+			<tr id="sr-fees-daily-avg">
+				<td>Fees: Daily Average<br><span class="metricSub">Most recent 365-day average</span></td>
 			</tr>
 			<tr id="sr-fees-yday">
 				<td>Fees: Registered Yesterday</td>
@@ -393,7 +413,7 @@ async function cleanStage() {
 				<td>Fees: Prev. Epoch<br><span class="metricSub">Prev. Thursday till Prev. Wednesday</span></td>
 			</tr>
 			<tr id="sr-fees-year-adj">
-				<td>Fees: Past 1 Year<br><span class="metricSub">Younger than 1yr. extrapolated to 1yr.</span></td>
+				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if <1yr.</span></td>
 			</tr>
 
 			<tr id="sr-fees-ann-fdv">
@@ -626,27 +646,22 @@ async function paint_vols(s) {
 	let _k = Object.keys(STATE);
 
 	for(let i=0; i< _k.length; i++) {
+		let _vat = totaller_alltime(STATE[ i ].volumes.totalDataChart);
+		STATE[i].volumeAllTime = _vat;
+		$("sr-vol-alltime").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ _vat.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
 		$("sr-vol-yday").innerHTML += `
 			<td class="DID_${_k[i]}">
 				$${ STATE[ i ].volumes.total24h == null ? "0" : STATE[ i ].volumes.total24h.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
 			</td>
 		`;
 	}
-
-	// day of last data
-	let _dow = (new Date()).getDay();
-	// defillama doesnt have today's data
-	_dow--;
-/*
-D	GD	SI	FI		SI	FI
-su	0	0	3		4	10
-mo	1	0	4		5	11
-tu	2	0	5		6	12
-we	3	0	6		7	13
-th	4	0	0		1	7
-fr	5	0	1		2	8
-sa	6	0	2		3	9
-*/
 
 
 	for(let i=0; i< _k.length; i++) {
@@ -669,11 +684,35 @@ sa	6	0	2		3	9
 		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
 	}
 
+	for(let i=0; i< _k.length; i++) {
+		$("sr-vol-daily-avg").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${
+					STATE[ i ].volumeAllTime == null || STATE[ i ].feesYearAdj == undefined
+					? 0
+					: ( STATE[i].volumeAllTime / STATE[i].volumes.totalDataChart.length ).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0})
+				}
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
 }
 
 async function paint_fees(s) {
 
 	let _k = Object.keys(STATE);
+
+
+	for(let i=0; i< _k.length; i++) {
+		let _fat = totaller_alltime(STATE[ i ].fees.totalDataChart);
+		STATE[i].feesAllTime = _fat;
+		$("sr-fees-alltime").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ _fat.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+	}
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-fees-yday").innerHTML += `
@@ -682,22 +721,6 @@ async function paint_fees(s) {
 			</td>
 		`;
 	}
-
-	// day of last data
-	let _dow = (new Date()).getDay();
-	// defillama doesnt have today's data
-	_dow--;
-/*
-D	GD	SI	FI		SI	FI
-su	0	0	3		4	10
-mo	1	0	4		5	11
-tu	2	0	5		6	12
-we	3	0	6		7	13
-th	4	0	0		1	7
-fr	5	0	1		2	8
-sa	6	0	2		3	9
-*/
-
 
 	for(let i=0; i< _k.length; i++) {
 		let _feo = totaller_ong(STATE[ i ].fees.totalDataChart);
@@ -750,7 +773,37 @@ sa	6	0	2		3	9
 		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
 	}
 
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-daily-avg").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${
+					STATE[ i ].feesYearAdj == null || STATE[ i ].feesYearAdj == undefined
+					? 0
+					: ( STATE[ i ].feesYearAdj / 365).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
 }
+
+/*
+
+// day of last data
+let _dow = (new Date()).getDay();
+// defillama doesnt have today's data
+_dow--;
+
+D	GD	SI	FI		SI	FI
+su	0	0	3		4	10
+mo	1	0	4		5	11
+tu	2	0	5		6	12
+we	3	0	6		7	13
+th	4	0	0		1	7
+fr	5	0	1		2	8
+sa	6	0	2		3	9
+*/
 
 function totaller_ong(ob) {
 	let _t=0;
@@ -774,6 +827,14 @@ function totaller_year_adj(ob) {
 	let _t=0;
 	let _skip = ob.length >= 365 ? ob.length - 365 : 0;
 	for(let _toi=_skip; _toi < ob.length ; _toi++ ) {
+		_t += ob[ _toi ][1];
+	}
+	if (_skip == 0 ) { _t = _t / ob.length * 365; }
+	return _t;
+}
+function totaller_alltime(ob) {
+	let _t=0;
+	for(let _toi=0; _toi < ob.length ; _toi++ ) {
 		_t += ob[ _toi ][1];
 	}
 	return _t;
