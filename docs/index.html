@@ -142,6 +142,12 @@ table tr td {
   white-space: nowrap;
 }
 
+.metricSub {
+  font-size: 0.8em;
+  color: #321;
+  font-style:  oblique;
+}
+
 @media(min-width:641px) {
   table  tr td:first-child {
     position: -webkit-sticky;
@@ -372,30 +378,40 @@ async function cleanStage() {
 				<td>Volumes: Registered Yesterday</td>
 			</tr>
 			<tr id="sr-vol-epoch-ong">
-				<td>Volumes: Curr. Epoch (Thu-Ystd)</td>
+				<td>Volumes: Curr. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
 			</tr>
 			<tr id="sr-vol-epoch-prev">
-				<td>Volumes: Prev. Epoch (Thu-Wed)</td>
+				<td>Volumes: Prev. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
 			</tr>
 			<tr id="sr-fees-yday">
 				<td>Fees: Registered Yesterday</td>
 			</tr>
 			<tr id="sr-fees-epoch-ong">
-				<td>Fees: Curr. Epoch (Thu-Ystd)</td>
+				<td>Fees: Curr. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
 			</tr>
 			<tr id="sr-fees-epoch-prev">
-				<td>Fees: Prev. Epoch (Thu-Wed)</td>
+				<td>Fees: Prev. Epoch<br><span class="metricSub">Prev. Thursday till Prev. Wednesday</span></td>
+			</tr>
+			<tr id="sr-fees-year-adj">
+				<td>Fees: Past 1 Year<br><span class="metricSub">Younger than 1yr. extrapolated to 1yr.</span></td>
 			</tr>
 
 			<tr id="sr-fees-ann-fdv">
-				<td>Annual Fees to FDV Ratio</td>
+				<td>Fees to FDV Ratio<br><span class="metricSub">Previous Epoch, Annualized</span></td>
 			</tr>
 
-			<tr id="sr-fees-ann-ve">
-				<td>Annual Fees per $1 of veToken</td>
+			<tr id="sr-fees-ann-ve-prev">
+				<td>Fees per $1 of veToken<br><span class="metricSub">Previous Epoch, Annualized</span></td>
 			</tr>
-			<tr id="sr-fees-apr-ve">
-				<td>Voting APR from Fees</td>
+			<tr id="sr-fees-apr-ve-prev">
+				<td>Voting APR: Fees Component<br><span class="metricSub">Previous Epoch</span></td>
+			</tr>
+
+			<tr id="sr-fees-ann-ve-year">
+				<td>Fees per $1 of veToken<br><span class="metricSub">Past 1 Year, extrapolated if young</span></td>
+			</tr>
+			<tr id="sr-fees-apr-ve-year">
+				<td>Voting APR: Fees Component<br><span class="metricSub">Past 1 Year, extrapolated if young</span></td>
 			</tr>
 
 
@@ -706,15 +722,26 @@ sa	6	0	2		3	9
 		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
 	}
 
+	for(let i=0; i< _k.length; i++) {
+		let _fya = totaller_year_adj(STATE[ i ].fees.totalDataChart);
+		STATE[i].feesYearAdj = _fya;
+		$("sr-fees-year-adj").innerHTML += `
+			<td class="DID_${_k[i]}">
+				$${ _fya.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+			</td>
+		`;
+		//if(i==6) console.log("fee",_k[i],_dow,_pthu,STATE[ i ].fees.totalDataChart,STATE[ i ].fees.totalDataChart)
+	}
+
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-fees-ann-fdv").innerHTML += `
 			<td class="DID_${_k[i]}">
 				${
-					STATE[ i ].total_supply == null || STATE[ i ].current_price == null
+					STATE[ i ].feesYearAdj == null || STATE[ i ].feesYearAdj == undefined
 					? 0
 					: (
-						( totaller_prev(STATE[ i ].fees.totalDataChart)  / 7 * 365 )
+						STATE[ i ].feesYearAdj
 						/ (STATE[ i ].total_supply * STATE[ i ].current_price)
 					).toLocaleString(undefined,{minimumFractionDigits:4,maximumFractionDigits:4})
 				}
@@ -740,6 +767,14 @@ function totaller_prev(ob) {
 	let _skip = _dow > 3 ? _dow-3 : _dow+4;
 	for(let _toi=_skip; _toi <= _skip+6 ; _toi++ ) {
 		_t += ob[ ob.length - 1 - _toi ][1];
+	}
+	return _t;
+}
+function totaller_year_adj(ob) {
+	let _t=0;
+	let _skip = ob.length >= 365 ? ob.length - 365 : 0;
+	for(let _toi=_skip; _toi < ob.length ; _toi++ ) {
+		_t += ob[ _toi ][1];
 	}
 	return _t;
 }
@@ -781,8 +816,8 @@ async function paint_veTotals(s) {
 	}
 
 	for(let i=0; i< _k.length; i++) {
-		$("sr-fees-ann-ve").innerHTML += `
-			<td class="DID_${_k[i]}" style="font-size:1.5em">
+		$("sr-fees-ann-ve-prev").innerHTML += `
+			<td class="DID_${_k[i]}" style="font-size:;font-weight:">
 				$${
 					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
 					? "0"
@@ -796,13 +831,44 @@ async function paint_veTotals(s) {
 	}
 
 	for(let i=0; i< _k.length; i++) {
-		$("sr-fees-apr-ve").innerHTML += `
-			<td class="DID_${_k[i]}" style="font-size:1.5em">
+		$("sr-fees-apr-ve-prev").innerHTML += `
+			<td class="DID_${_k[i]}" style="font-size:;font-weight: ;">
 				${
 					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
 					? "0"
 					: (
 						(STATE[ i ].feesEpochPrevious / 7 * 365 )
+						/ (STATE[ i ].veTotal * STATE[ i ].current_price)
+						* 100
+					).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-ann-ve-year").innerHTML += `
+			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight:bolder">
+				$${
+					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
+					? "0"
+					: (
+						(STATE[ i ].feesYearAdj )
+						/ (STATE[ i ].veTotal * STATE[ i ].current_price)
+					).toLocaleString(undefined,{minimumFractionDigits:4,maximumFractionDigits:4})
+				}
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-fees-apr-ve-year").innerHTML += `
+			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight:bolder ;">
+				${
+					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
+					? "0"
+					: (
+						(STATE[ i ].feesYearAdj )
 						/ (STATE[ i ].veTotal * STATE[ i ].current_price)
 						* 100
 					).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
