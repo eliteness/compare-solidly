@@ -361,13 +361,13 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week">
-				<td>Minted Supply: Current Week<br><span class="metricSub">Newly minted last Thursday</span></td>
+				<td>Minted Supply: Current Week<br><span class="metricSub">Newly minted last Thursday.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-year">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks</span></td>
+				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-inflation">
-				<td>Inflation (Excluding Rebase)<br><span class="metricSub">Total Supply increase in next 52 Weeks</span></td>
+				<td>Inflation<br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 
 			<tr id="sr-mc-cir">
@@ -381,10 +381,10 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week-usd">
-				<td>Minted Supply: This Week<br><span class="metricSub">Newly minted in next 52 Weeks</span></td>
+				<td>Minted Supply: This Week<br><span class="metricSub">Newly minted last Thursday.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-year-usd">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks</span></td>
+				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 
 			<tr id="sr-vol-alltime">
@@ -488,7 +488,7 @@ console.log(_cgd)
 		1:	( { ... { CSN: 1,	CSID:"VELO",	started:1655337600 },	... _cgd[6] } ),
 		2:	( { ... { CSN: 2,	CSID:"EQUAL",	started:1668643200 },	... _cgd[2] } ),
 		3:	( { ... { CSN: 3,	CSID:"THE",		started:1673481600 },	... _cgd[5] } ),
-		4:	( { ... { CSN: 4,	CSID:"RAM",		started:1674691200 },	... _cgd[4] } ),
+		4:	( { ... { CSN: 4,	CSID:"RAM",		started:1679529600 },	... _cgd[4] } ),
 		5:	( { ... { CSN: 5,	CSID:"VARA",	started:1675900800 },	... _cgd[3] } ),
 		6:	( { ... { CSN: 6,	CSID:"CHR",		started:1680566400 },	... _cgd[0] } ),
 		//... add others here as key=ticker & value=cgd[#]
@@ -1005,7 +1005,7 @@ async function paint_veTotals(s) {
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-fees-apr-ve-year").innerHTML += `
-			<td class="DID_${_k[i]}" style="font-size:;font-weight: ;">
+			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight: bolder;">
 				${
 					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
 					? "0"
@@ -1078,7 +1078,7 @@ async function paint_mints(s) {
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-mint-inflation").innerHTML += `
-			<td class="DID_${_k[i]}">
+			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight: bolder;">
 				${
 					STATE[i].mintThisWeekUSD == undefined
 					? 0
