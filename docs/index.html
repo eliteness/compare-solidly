@@ -484,15 +484,19 @@ console.log(_cgd)
 		/// First Key means First Column, Last Key means Last Column!
 		/// We're simply using the order of their respective launch dates
 		/// NOTE: `_cgd` indexes will change depending on alpabetical order of cg ids!!! MAKE SURE TO MAKE SURE THIS!!!!!
-		0:	( { ... { CSN: 0,	CSID:"CRV",		started:1596672000 },	... _cgd[1] } ),
-		1:	( { ... { CSN: 1,	CSID:"VELO",	started:1655337600 },	... _cgd[6] } ),
-		2:	( { ... { CSN: 2,	CSID:"EQUAL",	started:1668643200 },	... _cgd[2] } ),
-		3:	( { ... { CSN: 3,	CSID:"THE",		started:1673481600 },	... _cgd[5] } ),
-		4:	( { ... { CSN: 4,	CSID:"RAM",		started:1679529600 },	... _cgd[4] } ),
-		5:	( { ... { CSN: 5,	CSID:"VARA",	started:1678233600 },	... _cgd[3] } ),
-		6:	( { ... { CSN: 6,	CSID:"CHR",		started:1683072000 },	... _cgd[0] } ),
+		0:	( { ... { CSN: 0,	CSID: "CRV",	started: 1596672000 },	... _cgd[1] } ),
+		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[6] } ),
+		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2] } ),
+		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5] } ),
+		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4] } ),
+		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678233600 },	... _cgd[3] } ),
+		6:	( { ... { CSN: 6,	CSID: "CHR",	started: 1683072000 },	... _cgd[0] } ),
 		//... add others here as key=ticker & value=cgd[#]
 	};
+
+	//chronos hotfix
+	STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
+
 
 	let _k = Object.keys(STATE);
 
