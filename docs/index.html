@@ -361,7 +361,7 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week">
-				<td>Minted Supply: Current Week<br><span class="metricSub">Newly minted last Thursday.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: Current Week<br><span class="metricSub">To be minted this Thursday.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-year">
 				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
@@ -381,7 +381,7 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week-usd">
-				<td>Minted Supply: This Week<br><span class="metricSub">Newly minted last Thursday.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: This Week<br><span class="metricSub">To be minted this Thursday.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-year-usd">
 				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
@@ -593,7 +593,7 @@ console.log(_cgd)
 	_mint_chr	=	new ethers.Contract("0x233001101d35d7a5cab7d51bcfbab3679ae4dc15", mintabi, ARBITRUM);
 
 	_mint = await Promise.all([
-		_mint_crv.mintable_in_timeframe( Math.floor(Date.now()/1000), Math.floor(Date.now()/1000)+86400*7 ),
+		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5))+86400*365 ),
 		_mint_velo.weekly_emission(),
 		_mint_equal.weekly_emission(),
 		_mint_the.weekly_emission(),
@@ -606,15 +606,15 @@ console.log(_cgd)
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeekUSD = STATE[i].mintThisWeek * STATE[i].current_price; }
 
 	_mint52 = await Promise.all([
-		_mint_crv.mintable_in_timeframe( Math.floor(Date.now()/1000), Math.floor(Date.now()/1000)+86400*365 ),
+		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5))+86400*365 ),
 		///////////////////////////////TO-DO:
 		////////Use Custom Parameters instead of {{ 0.995, 104, 0.998 }}
-		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.995, 104, 0.998 ),
-		ann_mint_calc( STATE[2].mintThisWeek, STATE[2].currentEpoch, 0.995, 104, 0.998 ),
-		ann_mint_calc( STATE[3].mintThisWeek, STATE[3].currentEpoch, 0.995, 104, 0.998 ),
-		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.995, 104, 0.998 ),
-		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.995, 104, 0.998 ),
-		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.995, 104, 0.998 ),
+		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.995, 104, 0.998 ),	//velo
+		ann_mint_calc( STATE[2].mintThisWeek, STATE[2].currentEpoch, 0.995, 104, 0.998 ),	//equal
+		ann_mint_calc( STATE[3].mintThisWeek, STATE[3].currentEpoch, 0.995, 104, 0.998 ),	//the
+		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.990, 104, 0.998 ),	//ram
+		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.995, 104, 0.998 ),	//vara
+		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.995, 104, 0.998 ),	//chr
 	]);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYear = Number(_mint52[i]) / (i==0?1e18:1) ; }
