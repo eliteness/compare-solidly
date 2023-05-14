@@ -593,7 +593,7 @@ console.log(_cgd)
 	_mint_chr	=	new ethers.Contract("0x233001101d35d7a5cab7d51bcfbab3679ae4dc15", mintabi, ARBITRUM);
 
 	_mint = await Promise.all([
-		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5))+86400*365 ),
+		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5)/1e3)+86400*7 ),
 		_mint_velo.weekly_emission(),
 		_mint_equal.weekly_emission(),
 		_mint_the.weekly_emission(),
@@ -606,7 +606,7 @@ console.log(_cgd)
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeekUSD = STATE[i].mintThisWeek * STATE[i].current_price; }
 
 	_mint52 = await Promise.all([
-		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5))+86400*365 ),
+		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5)/1e3)+86400*365 ),
 		///////////////////////////////TO-DO:
 		////////Use Custom Parameters instead of {{ 0.995, 104, 0.998 }}
 		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.995, 104, 0.998 ),	//velo
