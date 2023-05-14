@@ -367,7 +367,7 @@ async function cleanStage() {
 				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 			<tr id="sr-mint-inflation">
-				<td>Inflation<br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
+				<td><b>Annual Inflation</b><br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
 			</tr>
 
 			<tr id="sr-mc-cir">
@@ -418,7 +418,7 @@ async function cleanStage() {
 				<td>Fees: Prev. Epoch<br><span class="metricSub">Prev. Thursday till Prev. Wednesday</span></td>
 			</tr>
 			<tr id="sr-fees-year-adj">
-				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if <1yr.</span></td>
+				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if &lt;1yr..</span></td>
 			</tr>
 
 			<tr id="sr-fees-ann-fdv">
@@ -433,10 +433,10 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-fees-ann-ve-year">
-				<td>Fees per $1 of veToken<br><span class="metricSub">Past 1 Year, extrapolated if young</span></td>
+				<td>Fees per $1 of veToken<br><span class="metricSub">Past 1 Year, extrapolated if &lt;1yr.</span></td>
 			</tr>
 			<tr id="sr-fees-apr-ve-year">
-				<td>Voting APR: Fees Component<br><span class="metricSub">Past 1 Year, extrapolated if <1</span></td>
+				<td><b>Voting APR: Fees Component</b><br><span class="metricSub">Past 1 Year, extrapolated if &lt;1yr.</span></td>
 			</tr>
 
 
@@ -497,7 +497,7 @@ console.log(_cgd)
 	let _k = Object.keys(STATE);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].startDate = new Date(STATE[i].started * 1e3); }
-	for(let i=0;i<_k.length;i++) { STATE[i].currentEpoch = ((Date.now()/1e3 - STATE[i].started)/86400/7).toFixed(); }
+	for(let i=0;i<_k.length;i++) { STATE[i].currentEpoch = ((Date.now()/1e3 - STATE[i].started)/86400/7 + 1).toFixed(); }
 
 	//1 6 2 5
 	//0 3 2 1
