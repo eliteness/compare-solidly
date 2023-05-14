@@ -495,7 +495,15 @@ console.log(_cgd)
 	};
 
 	//chronos hotfix
-	STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
+	///STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
+
+
+	let _chr_sup = await Promise.all([
+		fetch("https://api.allorigins.win/raw?url=https://circulatingapi.chronos.exchange/circulation"),
+		(new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply()
+	]);
+	STATE[6].circulating_supply = (await _chr_sup[0]).json();
+	STATE[6].total_supply = _chr_sup[1]/1e18;
 
 
 	let _k = Object.keys(STATE);
