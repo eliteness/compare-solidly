@@ -502,7 +502,7 @@ console.log(_cgd)
 		fetch("https://api.allorigins.win/raw?url=https://circulatingapi.chronos.exchange/circulation"),
 		(new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply()
 	]);
-	STATE[6].circulating_supply = (await _chr_sup[0]).json();
+	STATE[6].circulating_supply = (await _chr_sup[0].json());
 	STATE[6].total_supply = _chr_sup[1]/1e18;
 
 
