@@ -11,6 +11,7 @@
 <style>
 
 
+
 /*
 @font-face{font-family:bold;src: url(https://ftm.guru/font/bold.ttf);}
 @font-face{ font-family:italic;src: url(https://ftm.guru/font/italic.ttf);}
@@ -112,7 +113,7 @@ table {
   border-collapse: collapse;
 }
 
-table thead tr td a {
+table thead tr tH a {
 	color: #321;
 	text-decoration: 1px dashed #444 underline;
 }
@@ -121,7 +122,7 @@ table tbody tr td:first-child {
 	width:250px;
 	min-width:250px;
 }
-table thead  tr td {
+table thead  tr th {
 	text-align:center;
 	font-size:1.5em;
 }
@@ -138,7 +139,7 @@ table tr td {
 
 .wrapper {
   position: relative;
-  overflow: auto;
+  overflow: ;
   white-space: nowrap;
 }
 
@@ -148,14 +149,39 @@ table tr td {
   font-style:  oblique;
 }
 
+#srt-header{
+  text-align: center;
+  position: sticky;
+  top:0;
+  position: -webkit-sticky;
+  display: flex;
+  z-index: 1;
+}
+
+#srt-header div {
+  width: 200px;
+  min-width: 200px;
+  font-size:1.5em;
+  padding:10px;
+  background:linear-gradient(to right, #d0f5f2af, #90F7ECaf)
+}
+
+#srt-header div:first-child {
+  width: 250px;
+  min-width: 250px;
+  background: linear-gradient(to right, #d0f5f2, #90F7EC);
+}
+
 @media(min-width:641px) {
-  table  tr td:first-child {
+  table tbody tr td:first-child {
     position: -webkit-sticky;
     position: sticky;
     left: 0px;
     background: linear-gradient(to right, #d0f5f2, #90F7EC)
   }
 }
+
+
 </style>
 <body>
 <div class="body" align="center">
@@ -168,7 +194,13 @@ table tr td {
 	<br><br><br>
 
 	<div class="view">
+		<div alig="center" id="srt-header">
+			<div>Metrics \ DEX</div>
+		</div>
 		<div class="wrapper">
+			<div class="wrapper-headers" id="wrapper-header">
+			</div>
+
 			<table align="center" id="stageTable">
 			</table>
 		</div>
@@ -201,8 +233,10 @@ Are we missing something interesting? Jump into our <a href="https://discord.gg/
 <a href="https://ftm.guru" style="color:#555;text-shadow:none;text-decoration:none;font-weight:bolder">Powered by Guru Network, CoinGecko, DefiLlama & various public blockchains & their valuable node service providers. 🦾</a>
 </div>
 </body>
+
 <script src="https://ftm.guru/ethers-5.2.umd.min.js">
 </script>
+
 
 <script>
 
@@ -319,12 +353,9 @@ function arf(){
 
 async function cleanStage() {
 
+	$("srt-header").innerHTML = "<div>Metrics \ DEX</div>";
+
 	$("stageTable").innerHTML = `
-		<thead>
-			<tr id="sr-name">
-				<td>Metric \\ DEX</td>
-			</tr>
-		</thead>
 		<tbody id="stage">
 			<tr id="sr-launch">
 				<td>Start of Epoch 1</td>
@@ -421,7 +452,7 @@ async function cleanStage() {
 				<td>Fees: Prev. Epoch<br><span class="metricSub">Prev. Thursday till Prev. Wednesday</span></td>
 			</tr>
 			<tr id="sr-fees-year-adj">
-				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if &lt;1yr..</span></td>
+				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if &lt;1yr.</span></td>
 			</tr>
 
 			<tr id="sr-fees-ann-fdv">
@@ -466,13 +497,10 @@ async function cleanStage() {
 
 async function dr() {
 	// STEP 0 : INITIALIZE
+	//cleanStage;return;
 
-	/*
-		crv -
-		velo - 2 jun 2022
-	*/
 
-	// STEP 1 : CoinGecko Data
+	// STEP 1 : initialize CoinGecko Data
 
 	let _cgd = await (await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=curve-dao-token%2Cvelodrome-finance%2Cthena%2Cchronos-finance%2Cramses-exchange%2Cequalizer-dex%2Cequilibre&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=30d&locale=en")).json();
 console.log(_cgd)
@@ -480,7 +508,6 @@ console.log(_cgd)
 	// remap it to The STATE object
 
 	//STARTS: MUST BE ROUNDED TO THURSDAY MIDNIGHTS (U.T.C.)
-	//1596672000, 1655337600, 1668643200, 1673481600, 1674691200, 1675900800, 1683072000
 
 	STATE = {
 		/// Order of Keys Matters in the STATE!
@@ -492,21 +519,22 @@ console.log(_cgd)
 		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2] } ),
 		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5] } ),
 		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4] } ),
-		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678233600 },	... _cgd[3] } ),
+		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678320000 },	... _cgd[3] } ),
 		6:	( { ... { CSN: 6,	CSID: "CHR",	started: 1683072000 },	... _cgd[0] } ),
 		//... add others here as key=ticker & value=cgd[#]
 	};
 
 	//chronos hotfix
-	///STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
+	//STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
 
 
 	let _chr_sup = await Promise.all([
-		fetch("https://api.allorigins.win/raw?url=https://circulatingapi.chronos.exchange/circulation"),
+		fetch("https://circulatingapi.chronos.exchange/circulation"),
 		(new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply()
 	]);
 	STATE[6].circulating_supply = (await _chr_sup[0].json());
 	STATE[6].total_supply = _chr_sup[1]/1e18;
+
 
 
 	let _k = Object.keys(STATE);
@@ -686,10 +714,10 @@ async function paint_basics(s) {
 	let _k = Object.keys(STATE);
 
 	for(let i=0; i< _k.length; i++) {
-		$("sr-name").innerHTML += `
-			<td class="DID_${_k[i]}">
+		$("srt-header").innerHTML += `
+			<div class="DID_${_k[i]}">
 				${ STATE[ i ].name == null || STATE[ i ].name == null  ? "?" : STATE[ i ].name.split(" ")[0] }
-			</td>
+			</div>
 		`;
 	}
 
