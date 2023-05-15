@@ -361,13 +361,16 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week">
-				<td>Minted Supply: Current Week<br><span class="metricSub">To be minted this Thursday.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: Current Week<br><span class="metricSub">To be minted this Thursday.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 			<tr id="sr-mint-year">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+			</tr>
+			<tr id="sr-mint-dec">
+				<td>Minted Supply: Decay Factor<br><span class="metricSub">Decrease between consecutive mints.</span></td>
 			</tr>
 			<tr id="sr-mint-inflation">
-				<td><b>Annual Inflation</b><br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
+				<td><b>Annual Inflation</b><br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 
 			<tr id="sr-mc-cir">
@@ -381,10 +384,10 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-mint-week-usd">
-				<td>Minted Supply: This Week<br><span class="metricSub">To be minted this Thursday.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: This Week<br><span class="metricSub">To be minted this Thursday.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 			<tr id="sr-mint-year-usd">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Does not include inflation from Rebase.</span></td>
+				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 
 			<tr id="sr-vol-alltime">
@@ -509,7 +512,7 @@ console.log(_cgd)
 	let _k = Object.keys(STATE);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].startDate = new Date(STATE[i].started * 1e3); }
-	for(let i=0;i<_k.length;i++) { STATE[i].currentEpoch = ((Date.now()/1e3 - STATE[i].started)/86400/7 + 1).toFixed(); }
+	for(let i=0;i<_k.length;i++) { STATE[i].currentEpoch = Number(((Date.now()/1e3 - STATE[i].started)/86400/7 + 1).toFixed()); }
 
 	//1 6 2 5
 	//0 3 2 1
@@ -592,6 +595,7 @@ console.log(_cgd)
 	*/
 
 
+	await paint_mint_dec();
 
 	mintabi = ["function weekly_emission() public view returns(uint256)"];
 	mintabi_crv = ["function mintable_in_timeframe(uint256,uint256) public view returns(uint256)"];
@@ -614,19 +618,40 @@ console.log(_cgd)
 		_mint_chr.weekly_emission(),
 	]);
 
-	for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeek = Number(_mint[i])/1e18; }
+	///for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeek = Number(_mint[i])/1e18; }
+	STATE[0].mintThisWeek = Number(_mint[0])/1e18;	//crv
+
+	//velo : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
+	STATE[1].mintThisWeek  = Number(_mint[1])/1e18 * (1 + ((STATE[1].veTotal/STATE[1].total_supply)**3)/2 + 30/1000  );
+
+	STATE[2].mintThisWeek = Number(_mint[2])/1e18;	//equal
+
+	STATE[3].mintThisWeek  = Number(_mint[3])/1e18;	//the
+
+	STATE[4].mintThisWeek  = Number(_mint[4])/1e18;	//ram
+
+	//vara : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
+	STATE[5].mintThisWeek  = Number(_mint[5])/1e18 * (1 + ((STATE[5].veTotal/STATE[5].total_supply)**3)/2 + 30/1000  );
+
+	STATE[6].mintThisWeek  = Number(_mint[6])/1e18;	//chr
+
+
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeekUSD = STATE[i].mintThisWeek * STATE[i].current_price; }
+
 
 	_mint52 = await Promise.all([
 		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5)/1e3)+86400*365 ),
 		///////////////////////////////TO-DO:
 		////////Use Custom Parameters instead of {{ 0.995, 104, 0.998 }}
-		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.995, 104, 0.998 ),	//velo
+		////////
+		//velo : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
+		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.99 , 104, 0.99  ), //* (1 + ((STATE[1].veTotal/STATE[1].total_supply)**3)/2 + 30/1000  ),
 		ann_mint_calc( STATE[2].mintThisWeek, STATE[2].currentEpoch, 0.995, 104, 0.998 ),	//equal
-		ann_mint_calc( STATE[3].mintThisWeek, STATE[3].currentEpoch, 0.995, 104, 0.998 ),	//the
-		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.990, 104, 0.998 ),	//ram
-		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.995, 104, 0.998 ),	//vara
-		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.995, 104, 0.998 ),	//chr
+		ann_mint_calc( STATE[3].mintThisWeek, STATE[3].currentEpoch, 0.99 , 104, 0.99  ),	//the
+		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.99 , 104, 0.99  ),	//ram
+		//vara : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
+		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.99 , 104, 0.99  ),// * (1 + ((STATE[5].veTotal/STATE[5].total_supply)**3)/2 + 30/1000  ),
+		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.99 , 104, 0.99  ),	//chr
 	]);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYear = Number(_mint52[i]) / (i==0?1e18:1) ; }
@@ -1033,20 +1058,33 @@ async function paint_veTotals(s) {
 
 }
 
+async function paint_mint_dec() {
+	let _k = Object.keys(STATE);
+
+	$("sr-mint-dec").innerHTML += `
+		<td class="DID_${_k[0]}">0.00%</td>
+		<td class="DID_${_k[1]}">-1.00%</td>
+		<td class="DID_${_k[2]}">-0.50%</td>
+		<td class="DID_${_k[3]}">-1.00%</td>
+		<td class="DID_${_k[4]}">-1.00%</td>
+		<td class="DID_${_k[5]}">-1.00%</td>
+		<td class="DID_${_k[6]}">-1.00%</td>
+	`;
+}
+
+
 async function ann_mint_calc(_curr_mint, _curr_ep, _main_dec, _tail_ep, _tail_dec) {
 	let _tm = 0;
 	let _lmm = 0;
 	let i=0;
 	for(i=_curr_ep;i < _curr_ep + 52; i++) {
 		if(i < _tail_ep) {
-			_lmm = _curr_mint * _main_dec ** i;
+			_lmm = _curr_mint * _main_dec ** (i-_curr_ep);
 			_tm += _lmm;
 		}
-	}
-	if ( i < _tail_ep ) { return _tm; }
-
-	for(;i < (_curr_ep + 52); i++) {
-		_tm += _lmm * _tail_dec ** i;
+		if (i >= _tail_ep) {
+			_tm += _lmm * _tail_dec ** (i-_curr_ep);
+		}
 	}
 	return _tm;
 }
