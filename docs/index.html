@@ -163,13 +163,12 @@ table tr td {
   min-width: 200px;
   font-size:1.5em;
   padding:10px;
-  background:linear-gradient(to right, #d0f5f2af, #90F7ECaf)
+  background:linear-gradient(to right, #d0f5f2, #BBFFF8, #d0f5f2);
 }
 
 #srt-header div:first-child {
   width: 250px;
   min-width: 250px;
-  background: linear-gradient(to right, #d0f5f2, #90F7EC);
 }
 
 @media(min-width:641px) {
@@ -381,14 +380,39 @@ async function cleanStage() {
 			<tr id="sr-price">
 				<td>Spot Trading Price</td>
 			</tr>
+
 			<tr id="sr-sup-cir">
 				<td>Circulating Supply</td>
 			</tr>
+			<tr id="sr-mc-cir">
+				<td>Circulating Market Cap</td>
+			</tr>
+
 			<tr id="sr-sup-ve">
 				<td>veToken Total Supply</td>
 			</tr>
+			<tr id="sr-mc-ve">
+				<td>veToken Market Cap</td>
+			</tr>
+
 			<tr id="sr-sup-dil">
 				<td>Fully Diluted Supply</td>
+			</tr>
+			<tr id="sr-mc-dil">
+				<td>Fully Diluted Valuation</td>
+			</tr>
+
+			<tr id="sr-sup-locked">
+				<td>Supply Locked in ve</td>
+			</tr>
+			<tr id="sr-sup-lockrate-app">
+				<td>ve: Apparent Locking Rate<br><span class="metricSub">veLocked / (CircSupply + veLocked)</span></td>
+			</tr>
+			<tr id="sr-sup-lockrate-eff">
+				<td>ve: Effective Locking Rate<br><span class="metricSub">veTotalSupply / (CircSupply + veLocked)</span></td>
+			</tr>
+			<tr id="sr-sup-maxlockrate">
+				<td>ve: Max Locked ve<br><span class="metricSub">% of locks at full ve-power</span></td>
 			</tr>
 
 			<tr id="sr-mint-week">
@@ -404,15 +428,6 @@ async function cleanStage() {
 				<td><b>Annual Inflation</b><br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 
-			<tr id="sr-mc-cir">
-				<td>Circulating Market Cap</td>
-			</tr>
-			<tr id="sr-mc-ve">
-				<td>veToken Market Cap</td>
-			</tr>
-			<tr id="sr-mc-dil">
-				<td>Fully Diluted Valuation</td>
-			</tr>
 
 			<tr id="sr-mint-week-usd">
 				<td>Minted Supply: This Week<br><span class="metricSub">To be minted this Thursday.<br>Includes inflation from Rebases.</span></td>
@@ -609,7 +624,7 @@ console.log(_cgd)
 	await paint_veTotals();
 
 
-	/*
+
 	//For Lock-Rate
 	_veLocked = await Promise.all([
 		_ve_crv.supply(),
@@ -620,7 +635,11 @@ console.log(_cgd)
 		_ve_vara.supply(),
 		_ve_chr.supply(),
 	]);
-	*/
+
+	for(let i=0;i<_veTotal.length;i++) { if(i!=2) STATE[i].veLocked = Number(_veLocked[i])/1e18; }
+
+	await paint_lockrates();
+
 
 
 	await paint_mint_dec();
@@ -785,6 +804,57 @@ async function paint_basics(s) {
 	}
 }
 
+
+
+async function paint_lockrates(s) {
+
+	let _k = Object.keys(STATE);
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-sup-lockrate-app").innerHTML += `
+			<td class="DID_${i}">
+				${
+					STATE[ i ].circulating_supply == undefined || STATE[ i ].veLocked == undefined
+					? 0
+					: (STATE[ i ].veLocked / (STATE[ i ].circulating_supply + STATE[ i ].veLocked) * 100 )
+					.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-sup-lockrate-eff").innerHTML += `
+			<td class="DID_${i}">
+				${
+					STATE[ i ].circulating_supply == undefined || STATE[ i ].veTotal == undefined || STATE[ i ].veLocked == undefined
+					? 0
+					: (STATE[ i ].veTotal / (STATE[ i ].circulating_supply + STATE[ i ].veLocked) * 100 )
+					.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-sup-locked").innerHTML += `
+			<td class="DID_${i}">
+				${ STATE[ i ].veLocked == undefined ? 0 : STATE[ i ].veLocked.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+				${ STATE[ i ].symbol == null ? "tokens" : STATE[ i ].symbol.toUpperCase() }
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-sup-maxlockrate").innerHTML += `
+			<td class="DID_${i}">
+				${ STATE[ i ].veTotal == undefined || STATE[ i ].veLocked == undefined ? 0 : ( STATE[i].veTotal / STATE[i].veLocked * 100 ).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+}
 
 
 async function paint_vols(s) {
