@@ -408,6 +408,9 @@ async function cleanStage() {
 			<tr id="sr-sup-lockrate-app">
 				<td>ve: Apparent Locking Rate<br><span class="metricSub">veLocked / (CircSupply + veLocked)</span></td>
 			</tr>
+			<tr id="sr-sup-lockrate-abs">
+				<td>ve: Absolute Locking Rate<br><span class="metricSub">Total Supply of ve / Fully Diluted Supply</span></td>
+			</tr>
 			<tr id="sr-sup-lockrate-eff">
 				<td>ve: Effective Locking Rate<br><span class="metricSub">veTotalSupply / (CircSupply + veLocked)</span></td>
 			</tr>
@@ -817,6 +820,19 @@ async function paint_lockrates(s) {
 					STATE[ i ].circulating_supply == undefined || STATE[ i ].veLocked == undefined
 					? 0
 					: (STATE[ i ].veLocked / (STATE[ i ].circulating_supply + STATE[ i ].veLocked) * 100 )
+					.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-sup-lockrate-abs").innerHTML += `
+			<td class="DID_${i}">
+				${
+					STATE[ i ].veTotal == undefined || STATE[ i ].total_supply == undefined
+					? 0
+					: (STATE[i].veTotal / STATE[i].total_supply * 100 )
 					.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
 				}%
 			</td>
