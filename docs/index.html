@@ -427,8 +427,11 @@ async function cleanStage() {
 			<tr id="sr-mint-dec">
 				<td>Minted Supply: Decay Factor<br><span class="metricSub">Decrease between consecutive mints.</span></td>
 			</tr>
-			<tr id="sr-mint-inflation">
-				<td><b>Annual Inflation</b><br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+			<tr id="sr-mint-inflation-abs">
+				<td>Absolute Inflation<br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+			</tr>
+			<tr id="sr-mint-inflation-eff">
+				<td><b>Effective Inflation</b><br><span class="metricSub">Annual increase in veToken Supply (Locked) & Circulating supply from minting.</span></td>
 			</tr>
 
 
@@ -696,7 +699,7 @@ console.log(_cgd)
 		////////
 		//velo : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
 		ann_mint_calc( STATE[1].mintThisWeek, STATE[1].currentEpoch, 0.99 , 104, 0.99  ), //* (1 + ((STATE[1].veTotal/STATE[1].total_supply)**3)/2 + 30/1000  ),
-		ann_mint_calc( STATE[2].mintThisWeek, STATE[2].currentEpoch, 0.995, 104, 0.998 ),	//equal
+		ann_mint_calc( STATE[2].mintThisWeek, STATE[2].currentEpoch, 0.98, 104, 0.998 ),	//equal
 		ann_mint_calc( STATE[3].mintThisWeek, STATE[3].currentEpoch, 0.99 , 104, 0.99  ),	//the
 		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.99 , 104, 0.99  ),	//ram
 		//vara : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
@@ -707,7 +710,8 @@ console.log(_cgd)
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYear = Number(_mint52[i]) / (i==0?1e18:1) ; }
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYearUSD = STATE[i].mintThisYear * STATE[i].current_price; }
 
-	for(let i=0;i<_k.length;i++) { STATE[i].mintInflation =  STATE[i].mintThisYear / STATE[i].total_supply;  }
+	for(let i=0;i<_k.length;i++) { STATE[i].mintInflationAbsolute =  STATE[i].mintThisYear / STATE[i].total_supply;  }
+	for(let i=0;i<_k.length;i++) { STATE[i].mintInflationEffective =  STATE[i].mintThisYear / Math.min(STATE[i].veLocked + STATE[i].circulating_supply, STATE[i].total_supply);  }
 
 	await paint_mints();
 
@@ -1241,12 +1245,24 @@ async function paint_mints(s) {
 	}
 
 	for(let i=0; i< _k.length; i++) {
-		$("sr-mint-inflation").innerHTML += `
+		$("sr-mint-inflation-abs").innerHTML += `
+			<td class="DID_${_k[i]}" style="font-size:;font-weight: ;">
+				${
+					STATE[i].mintThisWeekUSD == undefined
+					? 0
+					: (STATE[i].mintInflationAbsolute * 100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+				}%
+			</td>
+		`;
+	}
+
+	for(let i=0; i< _k.length; i++) {
+		$("sr-mint-inflation-eff").innerHTML += `
 			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight: bolder;">
 				${
 					STATE[i].mintThisWeekUSD == undefined
 					? 0
-					: (STATE[i].mintInflation * 100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
+					: (STATE[i].mintInflationEffective * 100).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})
 				}%
 			</td>
 		`;
