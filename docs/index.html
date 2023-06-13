@@ -431,7 +431,7 @@ async function cleanStage() {
 				<td>Absolute Inflation<br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
 			</tr>
 			<tr id="sr-mint-inflation-eff">
-				<td><b>Effective Inflation</b><br><span class="metricSub">Annual increase in veToken Supply (Locked) & Circulating supply from minting.</span></td>
+				<td><b>Effective Inflation</b><br><span class="metricSub">Annual increase in (veToken+Circulating) supply from minting.</span></td>
 			</tr>
 
 
@@ -704,7 +704,7 @@ console.log(_cgd)
 		ann_mint_calc( STATE[4].mintThisWeek, STATE[4].currentEpoch, 0.99 , 104, 0.99  ),	//ram
 		//vara : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
 		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.99 , 104, 0.99  ),// * (1 + ((STATE[5].veTotal/STATE[5].total_supply)**3)/2 + 30/1000  ),
-		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.99 , 104, 0.99  ),	//chr
+		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.98 , 104, 0.99  ),	//chr
 	]);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYear = Number(_mint52[i]) / (i==0?1e18:1) ; }
@@ -1180,13 +1180,13 @@ async function paint_mint_dec() {
 	let _k = Object.keys(STATE);
 
 	$("sr-mint-dec").innerHTML += `
-		<td class="DID_${_k[0]}">0.00%</td>
+		<td class="DID_${_k[0]}">+0.00%</td>
 		<td class="DID_${_k[1]}">-1.00%</td>
 		<td class="DID_${_k[2]}">-0.50%</td>
 		<td class="DID_${_k[3]}">-1.00%</td>
 		<td class="DID_${_k[4]}">-1.00%</td>
 		<td class="DID_${_k[5]}">-1.00%</td>
-		<td class="DID_${_k[6]}">-1.00%</td>
+		<td class="DID_${_k[6]}">-2.00%</td>
 	`;
 }
 
