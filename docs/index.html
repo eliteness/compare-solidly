@@ -484,7 +484,7 @@ async function cleanStage() {
 				<td>Fees per $1 of veToken<br><span class="metricSub">Previous Epoch, Annualized</span></td>
 			</tr>
 			<tr id="sr-fees-apr-ve-prev">
-				<td>Voting APR: Fees Component<br><span class="metricSub">Previous Epoch</span></td>
+				<td><b>Voting APR: Fees Component</b><br><span class="metricSub">Previous Epoch</span></td>
 			</tr>
 
 			<tr id="sr-fees-ann-ve-year">
@@ -1129,7 +1129,7 @@ async function paint_veTotals(s) {
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-fees-apr-ve-prev").innerHTML += `
-			<td class="DID_${_k[i]}" style="font-size:;font-weight: ;">
+			<td class="DID_${_k[i]}" style="font-size:1.25em;font-weight: bolder;">
 				${
 					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
 					? "0"
@@ -1160,7 +1160,7 @@ async function paint_veTotals(s) {
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-fees-apr-ve-year").innerHTML += `
-			<td class="DID_${_k[i]}" style="font-size:1.5em;font-weight: bolder;">
+			<td class="DID_${_k[i]}" style="font-size:1.25em;font-weight:bolder;">
 				${
 					STATE[ i ].veTotal == undefined || STATE[ i ].current_price == undefined || STATE[ i ].feesEpochPrevious == undefined
 					? "0"
