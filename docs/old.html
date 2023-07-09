@@ -543,7 +543,7 @@ console.log(_cgd)
 		/// NOTE: `_cgd` indexes will change depending on alpabetical order of cg ids!!! MAKE SURE TO MAKE SURE THIS!!!!!
 		0:	( { ... { CSN: 0,	CSID: "CRV",	started: 1596672000 },	... _cgd[1],	desc: "All DEX pools"		} ),
 		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[6],	desc: "v1 + v2"				} ),
-		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "v1 DEX only"	} ),	///+ Equity (Perps)
+		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "v1 + Equity (Perps)"	} ),
 		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5],	desc: "v1 + v2 (CL)"		} ),
 		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4],	desc: "v1 + v2 (CL)"		} ),
 		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678320000 },	... _cgd[3],	desc: "v1 DEX only"			} ),
@@ -551,9 +551,7 @@ console.log(_cgd)
 		//... add others here as key=ticker & value=cgd[#]
 	};
 
-	//ramses supp:diluted hotfix
-	STATE[4].total_supply = (await (new ethers.Contract("0xaaa6c1e32c55a7bfa8066a6fae9b42650f262418",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
-	//ramses hotfix
+	//chronos hotfix
 	//STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
 
 
@@ -613,8 +611,7 @@ console.log(_cgd)
 	veabi = ["function supply() public view returns(uint256)","function totalSupply() public view returns(uint256)"]
 
 	_ve_crv =	new ethers.Contract("0x5f3b5dfeb7b28cdbd7faba78963ee202a494e2a2", veabi, ETHEREUM);
-	//_ve_velo = new ethers.Contract("0x9c7305eb78a432ced5c4d14cac27e8ed569a2e26", veabi, OPTIMISM);
-	_ve_velo =	new ethers.Contract("0xFAf8FD17D9840595845582fCB047DF13f006787d", veabi, OPTIMISM);
+	_ve_velo =	new ethers.Contract("0x9c7305eb78a432ced5c4d14cac27e8ed569a2e26", veabi, OPTIMISM);
 	//this is a special one, ignore this implementation
 	_ve_equal = new ethers.Contract("0x3a603eCEAE046828FEBBcbd097bF97Adc23DC072", [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"EQUAL","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"VOTER","outputs":[{"internalType":"contract IVoter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_e","type":"address"}],"name":"addExcluded","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_o","type":"address"},{"internalType":"address","name":"_s","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_o","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"circulatingMarketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"circulatingSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"dilutedSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"excluded","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"fdv","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inExcluded","outputs":[{"internalType":"uint256","name":"_t","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inGauges","outputs":[{"internalType":"uint256","name":"_t","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inNFT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"info","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidity","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lockRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lockedMarketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"marketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"outstandingSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pool2","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"n","type":"uint256"}],"name":"pullExcluded","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"tGURU","outputs":[{"internalType":"contract ItGURU","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"veNFT","outputs":[{"internalType":"contract IveNFT","name":"","type":"address"}],"stateMutability":"view","type":"function"}], FANTOM);
 	_ve_the =	new ethers.Contract("0xfbbf371c9b0b994eebfcc977cef603f7f31c070d", veabi, BSC);
@@ -659,12 +656,11 @@ console.log(_cgd)
 
 	await paint_mint_dec();
 
-	mintabi = ["function weekly_emission() public view returns(uint256)","function weekly() public view returns(uint256)"];
+	mintabi = ["function weekly_emission() public view returns(uint256)"];
 	mintabi_crv = ["function mintable_in_timeframe(uint256,uint256) public view returns(uint256)"];
 
 	_mint_crv	=	new ethers.Contract("0xD533a949740bb3306d119CC777fa900bA034cd52", mintabi_crv, ETHEREUM);
-	//_mint_velo	=	new ethers.Contract("0x3460dc71a8863710d1c907b8d9d5dbc053a4102d", mintabi, OPTIMISM);
-	_mint_velo	=	new ethers.Contract("0x6dc9E1C04eE59ed3531d73a72256C0da46D10982", mintabi, OPTIMISM);
+	_mint_velo	=	new ethers.Contract("0x3460dc71a8863710d1c907b8d9d5dbc053a4102d", mintabi, OPTIMISM);
 	_mint_equal	=	new ethers.Contract("0x85e7f59248d1c52bd635f27518333f75fb80c72d", mintabi, FANTOM);
 	_mint_the	=	new ethers.Contract("0x86069feb223ee303085a1a505892c9d4bdbee996", mintabi, BSC);
 	_mint_ram	=	new ethers.Contract("0xaaaa0b6baefaec478eb2d1337435623500ad4594", mintabi, ARBITRUM);
@@ -673,7 +669,7 @@ console.log(_cgd)
 
 	_mint = await Promise.all([
 		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5)/1e3)+86400*7 ),
-		_mint_velo.weekly(),
+		_mint_velo.weekly_emission(),
 		_mint_equal.weekly_emission(),
 		_mint_the.weekly_emission(),
 		_mint_ram.weekly_emission(),
