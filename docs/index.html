@@ -7,236 +7,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="https://ftm.guru/icons/solidly.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./index.css" />
 </head>
-<style>
 
-
-
-/*
-@font-face{font-family:bold;src: url(https://ftm.guru/font/bold.ttf);}
-@font-face{ font-family:italic;src: url(https://ftm.guru/font/italic.ttf);}
-@font-face{ font-family:light_italic;src: url(https://ftm.guru/font/light_italic.ttf);}
-@font-face{ font-family:regular;src: url(https://ftm.guru/font/regular.ttf);}
-@font-face{ font-family:regular_italic;src: url(https://ftm.guru/font/regular_italic.ttf);}
-*/
-@font-face{ font-family:light;src: url(https://ftm.guru/font/light.ttf);}
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-html{
-  background-size: 100%;
-  background-attachment: fixed;
-  color:#000;
-  /*text-shadow: 2px 2px 2px #000;*/
-  background-image: radial-gradient( #32CCBCa1, #90F7EC21);
-
-}
-* {
-  scroll-behavior: smooth !important;
-  font-family:'Inter', sans-serif;
-  transition: background-size 0.5s;
-}
-
-.faq {padding:5%}
-.faq a{color:aqua;text-decoration:none}
-.icons20 img{height: 20px }
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-  overflow-y:  auto;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #192133;
-  color: #fff;
-  border-radius: 20px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup .close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #789;
-}
-.popup .close:hover {
-  color: #fff;
-  cursor:  context-menu
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-#social a img {
-  height: 24px;
-  margin:4px 4px 4px 0;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
-
-#content1 a {
-  color: aqua;
-}
-
-#content1 u {
-  text-decoration: dashed underline aqua
-}
-
-table {
-  border-collapse: collapse;
-}
-
-table thead tr tH a {
-	color: #321;
-	text-decoration: 1px dashed #444 underline;
-}
-table tbody tr td:first-child {
-	text-align:left;
-	width:250px;
-	min-width:250px;
-}
-table thead  tr th {
-	text-align:center;
-	font-size:1.5em;
-}
-table tr td {
-	padding:10px;
-	width: 200px;
-	text-align:center;
-	min-width: 200px;
-}
-.view {
-  margin: auto;
-  width: 100%;
-}
-
-.wrapper {
-  position: relative;
-  overflow: ;
-  white-space: nowrap;
-}
-
-.metricSubHead {
-  font-size: 0.5em;
-  color: #321;
-  font-style:  oblique;
-}
-
-.metricSub {
-  font-size: 0.8em;
-  color: #321;
-  font-style:  oblique;
-}
-
-#srt-header{
-  text-align: center;
-  position: sticky;
-  top:0;
-  position: -webkit-sticky;
-  display: flex;
-  z-index: 1;
-}
-
-#srt-header div {
-  width: 200px;
-  min-width: 200px;
-  font-size:1.5em;
-  padding:10px;
-  background:linear-gradient(to right, #d0f5f2, #BBFFF8, #d0f5f2);
-}
-
-#srt-header div:first-child {
-  width: 250px;
-  min-width: 250px;
-}
-
-@media(min-width:641px) {
-  table tbody tr td:first-child {
-    position: -webkit-sticky;
-    position: sticky;
-    left: 0px;
-    background: linear-gradient(to right, #d0f5f2, #90F7EC)
-  }
-}
-
-
-</style>
 <body>
-<div class="body" align="center">
-	<h1 style="font-family:;font-size:2.5em">
-		<img height="48px" style="position: relative;vertical-align: top;" id="" src="https://ftm.guru/icons/solidly.svg"> Solidly Forks
-	</h1>
-	<h2>Comparision of the <span style="font-family:;color:#001337;text-shadow: 0px 0px 2px aqua;">Best Solidly Visions</span>!</h2>
-	<div align="center" style="font-family:;font-weight:ligher;color:#543543e3;margin-top:-5px;font-size:1.25em">eliteness.network/compare-solidly</div>
-
-	<br><br><br>
-
-	<div class="view">
-		<div alig="center" id="srt-header">
-			<div>Metrics \ DEX</div>
-		</div>
-		<div class="wrapper">
-			<div class="wrapper-headers" id="wrapper-header">
+	<div id="root">
+		<div class="container text-center my-5">
+			<div class="mb-4 flex gap-3 justify-center items-center">
+				<div class="icon"></div>
+				<h1 class="text-4xl font-bold">Solidly Forks</h1>
 			</div>
-
-			<table align="center" id="stageTable">
-			</table>
+			<div>
+				<h2 class="text-2xl font-bold">Comparision of the Best Solidly Visions!</h2>
+				<p class="text-zinc-700 text-xl mt-2"><a href="https://eliteness.network/compare-solidly" target="_blank">eliteness.network/compare-solidly</a></p>
+			</div>
+		</div>
+		<div class="container mt-6 mb-12">
+			<div class="pr-1 pb-1 overflow-container">
+				<table id="table-wrapper" class="table-wrapper">
+	
+				</table>
+			</div>
+			<div class="container my-10">
+				<div class="text-center mb-10">
+					<p class="text-lg">Share this page for greater visibility and help us make the Data presented richer
+						with
+						your precious feedback! <br> Are we missing something interesting? Jump into our <a
+							href="https://discord.gg/QpyfMarNrV" target="_blank" rel="noreferrer"
+							class="underline text-blue-600 keychainify-checked">Discord</a> to help us with your
+						suggestions.
+					</p>
+				</div>
+				<div class="flex items-end lg:justify-between justify-center gap-6 flex-wrap text-center lg:text-left">
+					<div><a href="https://eliteness.network" target="_blank" rel="noreferrer"
+							class="text-2xl mb-1 block keychainify-checked">eliteness.network</a>
+						<p>An Explorer for Guru Network products &amp; services.</p>
+						<div class="flex items-center justify-center lg:justify-start gap-3 mt-4"><a
+								href="https://twitter.com/ftm1337" target="_blank" rel="noreferrer"
+								class="block keychainify-checked"><img src="https://ftm.guru/icons/twitter.svg"
+									class=" social-icon"></a><a href="https://discord.gg/QpyfMarNrV" target="_blank"
+								rel="noreferrer" class="block keychainify-checked"><img
+									src="https://ftm.guru/icons/discord.svg" class=" social-icon"></a><a
+								href="https://defillama.com/protocol/guru-network-dao" target="_blank" rel="noreferrer"
+								class="block keychainify-checked"><img src="https://ftm.guru/icons/defillama.svg"
+									class=" social-icon"></a><a href="https://defiwars.xyz/projects/gurunetwork"
+								target="_blank" rel="noreferrer" class="block keychainify-checked"><img
+									src="https://ftm.guru/icons/defiwars.svg" class=" social-icon"></a><a
+								href="https://coinmarketcap.com/currencies/elite-1337" target="_blank" rel="noreferrer"
+								class="block keychainify-checked"><img src="https://ftm.guru/icons/cmc.svg"
+									class="cmc social-icon"></a></div>
+					</div>
+					<div class="max-w-none lg:max-w-[40%]"><a href="https://ftm.guru" target="_blank" rel="noreferrer"
+							class="font-bold keychainify-checked">Powered by Guru Network, CoinGecko, DefiLlama &amp;
+							various
+							public blockchains &amp; their valuable node service providers. 🦾</a></div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-
-
-</div>
-
-<br><br>
-Share this page for greater visibility and help us make the Data presented richer with your precious feedback!<br>
-Are we missing something interesting? Jump into our <a href="https://discord.gg/QpyfMarNrV" target="_blank">Discord</a> to help us with your suggestions.
-<br> 🦾,🚀
-
-<br><br><br><br>
-<br><br><br><br>
-<div style="color:#333;text-shadow:none;text-decoration:none;font-family:">
-	<a href="https://eliteness.network" style="color:#000;text-shadow:none;text-decoration:none;font-size:1.5em">eliteness.network</a>
-	<br>An Explorer for Guru Network products & services.
-	<div id="social">
-		<a href="https://twitter.com/ftm1337"><img src="https://ftm.guru/icons/twitter.svg"></a>
-		<a href="https://discord.gg/QpyfMarNrV"><img src="https://ftm.guru/icons/discord.svg"></a>
-		<a href="https://defillama.com/protocol/guru-network-dao"><img src="https://ftm.guru/icons/defillama.svg"></a>
-		<a href="https://defiwars.xyz/projects/gurunetwork"><img src="https://ftm.guru/icons/defiwars.svg"></a>
-		<a href="https://coinmarketcap.com/currencies/elite-1337"><img src="https://ftm.guru/icons/cmc.svg" style="background:#321;border-radius:5px;"></a>
 	</div>
-</div>
-<br><br>
-<div align="right">
-<a href="https://ftm.guru" style="color:#555;text-shadow:none;text-decoration:none;font-weight:bolder">Powered by Guru Network, CoinGecko, DefiLlama & various public blockchains & their valuable node service providers. 🦾</a>
-</div>
 </body>
 
 <script src="https://ftm.guru/ethers-5.2.umd.min.js">
@@ -358,10 +187,14 @@ function arf(){
 
 async function cleanStage() {
 
-	$("srt-header").innerHTML = "<div>Metrics \ DEX</div>";
+	//$("srt-header").innerHTML = "<div>Metrics \ DEX</div>";
 
-	$("stageTable").innerHTML = `
-		<tbody id="stage">
+	$("table-wrapper").innerHTML = `
+	<thead class="table-head"><tr><th><h3 class="text-xl flex justify-start items-center min-w-max"><span>Metrics Dex</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/12124/large/Curve.png?1597369484" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Curve</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/25783/large/velo.png?1653817876" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Velodrome</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/28231/large/hq_png_icon_file.png?1668572967" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Equalizer</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/28864/large/IMG_20230129_155910_852.png?1674984924" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Thena</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29420/large/RAM_Token_32x32.png?1678678321" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Ramses</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29243/large/logos_200_200_px.png?1677575935" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Équilibre</span></h3></th><th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29622/large/chronos_icono-01.png?1680077336" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Chronos</span></h3></th></tr></thead>
+	<tbody id="stage">
+			<tr id="sr-method">
+				<td></td>
+			</tr>
 			<tr id="sr-launch">
 				<td>Start of Epoch 1</td>
 			</tr>
@@ -381,123 +214,306 @@ async function cleanStage() {
 			</tr>
 
 			<tr id="sr-ticker">
-				<td>Ticker (Symbol)</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Ticker (Symbol)</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-price">
-				<td>Spot Trading Price</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Spot Trading Price</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-sup-cir">
-				<td>Circulating Supply</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Circulating Supply</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mc-cir">
-				<td>Circulating Market Cap</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Circulating Market Cap</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-sup-ve">
-				<td>veToken Total Supply</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">veToken Total Supply</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mc-ve">
-				<td>veToken Market Cap</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">veToken Market Cap</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-sup-dil">
-				<td>Fully Diluted Supply</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fully Diluted Supply</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mc-dil">
-				<td>Fully Diluted Valuation</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fully Diluted Valuation</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-sup-locked">
-				<td>Supply Locked in ve</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Supply Locked in ve</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-sup-lockrate-app">
-				<td>ve: Apparent Locking Rate<br><span class="metricSub">veLocked / (CircSupply + veLocked)</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">ve: Apparent Locking Rate</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">veLocked / (CircSupply +
+                                        veLocked)</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-sup-lockrate-abs">
-				<td>ve: Absolute Locking Rate<br><span class="metricSub">Total Supply of ve / Fully Diluted Supply</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">ve: Absolute Locking Rate</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Total Supply of ve / Fully
+                                        Diluted Supply</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-sup-lockrate-eff">
-				<td>ve: Effective Locking Rate<br><span class="metricSub">veTotalSupply / (CircSupply + veLocked)</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">ve: Effective Locking Rate</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">veTotalSupply / (CircSupply +
+                                        veLocked)</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-sup-maxlockrate">
-				<td>ve: Max Locked ve<br><span class="metricSub">% of locks at full ve-power</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">ve: Max Locked ve</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">% of locks at full ve-power</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-mint-week">
-				<td>Minted Supply: Current Week<br><span class="metricSub">To be minted this Thursday.<br>Includes inflation from Rebases.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Minted Supply: Current Week</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">To be minted this Thursday.</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Includes inflation from Rebases.
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mint-year">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Minted Supply: This Year</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Newly minted in next 52 Weeks.
+                                    </p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Includes inflation from Rebases.
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mint-dec">
-				<td>Minted Supply: Decay Factor<br><span class="metricSub">Decrease between consecutive mints.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Minted Supply: Decay Factor</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Decrease between consecutive
+                                        mints.</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mint-inflation-abs">
-				<td>Absolute Inflation<br><span class="metricSub">Total Supply increase in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Absolute Inflation</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Total Supply increase in next 52
+                                        Weeks.</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Includes inflation from Rebases.
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mint-inflation-eff">
-				<td><b>Effective Inflation</b><br><span class="metricSub">Annual increase in (veToken+Circulating) supply from minting.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="font-bold text-lg">Effective Inflation</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Annual increase in veToken
+                                        Supply (Locked) &amp; Circulating supply from minting.</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 
 			<tr id="sr-mint-week-usd">
-				<td>Minted Supply: This Week<br><span class="metricSub">To be minted this Thursday.<br>Includes inflation from Rebases.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Minted Supply: This Week</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">To be minted this Thursday.</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Includes inflation from Rebases.
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-mint-year-usd">
-				<td>Minted Supply: This Year<br><span class="metricSub">Newly minted in next 52 Weeks.<br>Includes inflation from Rebases.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Minted Supply: This Year</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Newly minted in next 52 Weeks.
+                                    </p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Includes inflation from Rebases.
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-vol-alltime">
 				<td>Volumes: All Time Total</td>
 			</tr>
 			<tr id="sr-vol-daily-avg">
-				<td>Volumes: Daily Average<br><span class="metricSub">Most recent 365-day average</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Volumes: Daily Average</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Most recent 365-day average</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-vol-yday">
 				<td>Volumes: Registered Yesterday</td>
 			</tr>
 			<tr id="sr-vol-epoch-ong">
-				<td>Volumes: Curr. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Volumes: Curr. Epoch</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">This Thursday till Yesterday</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-vol-epoch-prev">
-				<td>Volumes: Prev. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Volumes: Prev. Epoch</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">This Thursday till Yesterday</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-alltime">
-				<td>Fees: All Time Total<br><span class="metricSub">Cummulative Total since launch</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: All Time Total</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Cummulative Total since launch
+                                    </p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-daily-avg">
-				<td>Fees: Daily Average<br><span class="metricSub">Most recent 365-day average</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: Daily Average</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Most recent 365-day average</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-yday">
-				<td>Fees: Registered Yesterday</td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: Registered Yesterday</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-epoch-ong">
-				<td>Fees: Curr. Epoch<br><span class="metricSub">This Thursday till Yesterday</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: Curr. Epoch</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">This Thursday till Yesterday</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-epoch-prev">
-				<td>Fees: Prev. Epoch<br><span class="metricSub">Prev. Thursday till Prev. Wednesday</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: Prev. Epoch</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Prev. Thursday till Prev.
+                                        Wednesday</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-year-adj">
-				<td>Fees: Past 1 Year<br><span class="metricSub">Cummulative Total, extrapolated if &lt;1yr.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees: Past 1 Year</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Cummulative Total, extrapolated
+                                        if &lt;1yr.</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-fees-ann-fdv">
-				<td>Fees to FDV Ratio<br><span class="metricSub">Previous Epoch, Annualized</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees to FDV Ratio</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Previous Epoch, Annualized</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-fees-ann-ve-prev">
-				<td>Fees per $1 of veToken<br><span class="metricSub">Previous Epoch, Annualized</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees per $1 of veToken</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Previous Epoch, Annualized</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-apr-ve-prev">
-				<td><b>Voting APR: Fees Component</b><br><span class="metricSub">Previous Epoch</span></td>
+				<td><b><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Voting APR: Fees Component</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Previous Epoch</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 			<tr id="sr-fees-ann-ve-year">
-				<td>Fees per $1 of veToken<br><span class="metricSub">Past 1 Year, extrapolated if &lt;1yr.</span></td>
+				<td><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="">Fees per $1 of veToken</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Past 1 Year, extrapolated if
+                                        &lt;1yr.</p>
+                                </div>
+                            </div></td>
 			</tr>
 			<tr id="sr-fees-apr-ve-year">
-				<td><b>Voting APR: Fees Component</b><br><span class="metricSub">Past 1 Year, extrapolated if &lt;1yr.</span></td>
+				<td><b><div class="select-none flex items-start gap-2">
+                                <div>
+                                    <p class="font-bold text-lg">Voting APR: Fees Component</p>
+                                    <p class="text-xs font-medium text-gray-700 italic">Past 1 Year, extrapolated if
+                                        &lt;1yr.</p>
+                                </div>
+                            </div></td>
 			</tr>
 
 
@@ -513,9 +529,6 @@ async function cleanStage() {
 			</tr>
 
 			-->
-
-			<tr><td></td></tr>
-
 		</tbody>
 	`;
 }
@@ -750,14 +763,12 @@ async function paint_basics(s) {
 	let _k = Object.keys(STATE);
 
 	for(let i=0; i< _k.length; i++) {
-		$("srt-header").innerHTML += `
-			<div class="DID_${_k[i]}">
-				<span>${ STATE[ i ].name == null  ? "?" : STATE[ i ].name.split(" ")[0] }</span>
-				<br><span class="metricSubHead">${ STATE[ i ].desc == null  ? "unknown methodology" : STATE[ i ].desc }</span>
-			</div>
+		$("sr-method").innerHTML += `
+			<td class="DID_${_k[i]}">
+				${ STATE[ i ].desc == null  ? "unknown methodology" : STATE[ i ].desc }
+			</td>
 		`;
 	}
-
 	for(let i=0; i< _k.length; i++) {
 		$("sr-launch").innerHTML += `
 			<td class="DID_${_k[i]}">
