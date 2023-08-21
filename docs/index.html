@@ -27,6 +27,7 @@
 				<table id="table-wrapper" class="table-wrapper">
 
 				</table>
+				<div id="content1"></div>
 			</div>
 			<div class="container my-10">
 				<div class="text-center mb-10">
@@ -69,10 +70,11 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </body>
 
 <script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
-<script src="index.js"></script>
+<!--<script src="index.js"></script>-->
 
 
 
@@ -108,6 +110,7 @@ async function basetrip() {
 	BSC = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/bsc");
 	ARBITRUM = new ethers.providers.JsonRpcProvider("https://arbitrum.blockpi.network/v1/rpc/public");
 	KAVA = new ethers.providers.JsonRpcProvider("https://evm.kava.io");
+	POLYGONMATIC = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com");  // https://polygon-rpc.com Chain ID: 137. Currency: MATIC
 
 	cleanStage();
 
@@ -171,6 +174,7 @@ function fornum2(n,d)
 }
 
 function notice(c) {
+	console.log(c);
 	window.location = "#note";
 	$("content1").innerHTML = c;
 }
@@ -191,8 +195,7 @@ function arf(){
 
 async function cleanStage() {
 
-	//$("srt-header").innerHTML = "<div>Metrics \ DEX</div>";
-
+	// These header image URLs come from the coingecko API data but can be rendered earlier here
 	$("table-wrapper").innerHTML = `
 	<thead class="table-head">
 		<tr>
@@ -204,7 +207,8 @@ async function cleanStage() {
 			<th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29420/large/RAM_Token_32x32.png?1678678321" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Ramses</span></h3></th>
 			<th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29243/large/logos_200_200_px.png?1677575935" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Équilibre</span></h3></th>
 			<th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/29622/large/chronos_icono-01.png?1680077336" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Chronos</span></h3></th>
-		</tr>
+			<th><h3 class="text-xl flex justify-start items-center min-w-max"><img src="https://assets.coingecko.com/coins/images/30799/small/Yp9H3agr_400x400.jpg?1687397986" alt="logo" class="w-6 h-6 mr-2 ml-2 inline-block"><span>Pearl</span></h3></th>
+	</tr>
 	</thead>
 	<tbody id="stage">
 			<tr id="sr-method">
@@ -226,6 +230,7 @@ async function cleanStage() {
 				<td><span id="bcn_3">Arbitrum</span></td>
 				<td><span id="bcn_5">Kava</span></td>
 				<td><span id="bcn_5">Arbitrum</span></td>
+				<td><span id="bcn_7">Polygon (Matic)</span></td>
 			</tr>
 
 			<tr id="sr-ticker">
@@ -596,7 +601,7 @@ async function dr() {
 
 	// STEP 1 : initialize CoinGecko Data
 
-	let _cgd = await (await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=curve-dao-token%2Cvelodrome-finance%2Cthena%2Cchronos-finance%2Cramses-exchange%2Cequalizer-dex%2Cequilibre&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=30d&locale=en")).json();
+	let _cgd = await (await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=curve-dao-token%2Cvelodrome-finance%2Cthena%2Cchronos-finance%2Cramses-exchange%2Cequalizer-dex%2Cequilibre%2cpearl&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=30d&locale=en")).json();
 console.log(_cgd)
 	// we get an array ordered alphabetically by id
 	// remap it to The STATE object
@@ -609,12 +614,13 @@ console.log(_cgd)
 		/// We're simply using the order of their respective launch dates
 		/// NOTE: `_cgd` indexes will change depending on alpabetical order of cg ids!!! MAKE SURE TO MAKE SURE THIS!!!!!
 		0:	( { ... { CSN: 0,	CSID: "CRV",	started: 1596672000 },	... _cgd[1],	desc: "All DEX pools"		} ),
-		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[6],	desc: "v1 + v2"				} ),
+		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[7],	desc: "v1 + v2"				} ),
 		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "v1 DEX only"	} ),	///+ Equity (Perps)
-		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5],	desc: "v1 + v2 (CL)"		} ),
-		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4],	desc: "v1 + v2 (CL)"		} ),
+		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[6],	desc: "v1 + v2 (CL)"		} ),
+		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[5],	desc: "v1 + v2 (CL)"		} ),
 		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678320000 },	... _cgd[3],	desc: "v1 DEX only"			} ),
 		6:	( { ... { CSN: 6,	CSID: "CHR",	started: 1683072000 },	... _cgd[0],	desc: "v1 DEX only"			} ),
+		7:	( { ... { CSN: 7,	CSID: "PEARL",	started: 1686787200 },	... _cgd[4],	desc: "v1.5 DEX only"			} ),
 		//... add others here as key=ticker & value=cgd[#]
 	};
 
@@ -623,6 +629,8 @@ console.log(_cgd)
 	//ramses hotfix
 	//STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
 
+	//pearl circ supply
+	STATE[7].circulating_supply = STATE[7].total_supply;
 
 	let _chr_sup = await Promise.all([
 		fetch("https://circulatingapi.chronos.exchange/circulation"),
@@ -653,6 +661,7 @@ console.log(_cgd)
 		fetch("https://api.llama.fi/summary/dexs/ramses-exchange?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/equilibre?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/chronos?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/pearlfi?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 	]);
 
 	for(let i=0;i<_vol.length;i++) { STATE[i].volumes = await _vol[i].json(); }
@@ -670,6 +679,7 @@ console.log(_cgd)
 		fetch("https://api.llama.fi/summary/fees/ramses-exchange?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/equilibre?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/chronos?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/pearlfi?dataType=dailyFees"),
 	]);
 
 	for(let i=0;i<_fee.length;i++) { STATE[i].fees = await _fee[i].json(); }
@@ -688,6 +698,7 @@ console.log(_cgd)
 	_ve_ram =	new ethers.Contract("0xAAA343032aA79eE9a6897Dab03bef967c3289a06", veabi, ARBITRUM);
 	_ve_vara =	new ethers.Contract("0x35361C9c2a324F5FB8f3aed2d7bA91CE1410893A", veabi, KAVA);
 	_ve_chr =	new ethers.Contract("0x9a01857f33aa382b1d5bb96c3180347862432b0d", veabi, ARBITRUM);
+	_ve_pearl =	new ethers.Contract("0x017A26B18E4DA4FE1182723a39311e67463CF633", veabi, POLYGONMATIC);
 
 	_veTotal = await Promise.all([
 		_ve_crv.totalSupply(),
@@ -697,11 +708,20 @@ console.log(_cgd)
 		_ve_ram.totalSupply(),
 		_ve_vara.totalSupply(),
 		_ve_chr.totalSupply(),
+		_ve_pearl.totalSupply(),
 	]);
 
 	await handleEqualExceptions(_veTotal[2]); //2:exception
 
 	for(let i=0;i<_veTotal.length;i++) { if(i!=2) STATE[i].veTotal = Number(_veTotal[i])/1e18; }
+
+	// pearl circ supply
+	STATE[7].circulating_supply = STATE[7].total_supply - STATE[7].veTotal;
+
+	// correct - pearl circulating supply value
+	_pearl_circ_string = `${ STATE[ 7 ].circulating_supply == null ? 0 : STATE[ 7 ].circulating_supply.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
+				${ STATE[ 7 ].symbol == null ? "tokens" : STATE[ 7 ].symbol.toUpperCase() }`;
+				$("sr-sup-cir-7").innerHTML = _pearl_circ_string;
 
 	await paint_veTotals();
 
@@ -716,6 +736,7 @@ console.log(_cgd)
 		_ve_ram.supply(),
 		_ve_vara.supply(),
 		_ve_chr.supply(),
+		_ve_pearl.supply(),
 	]);
 
 	for(let i=0;i<_veTotal.length;i++) { if(i!=2) STATE[i].veLocked = Number(_veLocked[i])/1e18; }
@@ -737,7 +758,8 @@ console.log(_cgd)
 	_mint_ram	=	new ethers.Contract("0xaaaa0b6baefaec478eb2d1337435623500ad4594", mintabi, ARBITRUM);
 	_mint_vara	=	new ethers.Contract("0x46a88f88584c9d4751db36da9127f12e4dcad6b8", mintabi, KAVA);
 	_mint_chr	=	new ethers.Contract("0x233001101d35d7a5cab7d51bcfbab3679ae4dc15", mintabi, ARBITRUM);
-
+	_mint_pearl =   new ethers.Contract("0x808A09D10fD0ca7B901d86DE96C5273aD04B0022", mintabi, POLYGONMATIC);
+	
 	_mint = await Promise.all([
 		_mint_crv.mintable_in_timeframe( Math.floor((Date.now()-Date.now()%864e5)/1000), Math.floor((Date.now()-Date.now()%864e5)/1e3)+86400*7 ),
 		_mint_velo.weekly(),
@@ -746,6 +768,7 @@ console.log(_cgd)
 		_mint_ram.weekly_emission(),
 		_mint_vara.weekly_emission(),
 		_mint_chr.weekly_emission(),
+		_mint_pearl.weekly_emission(),
 	]);
 
 	///for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeek = Number(_mint[i])/1e18; }
@@ -765,6 +788,7 @@ console.log(_cgd)
 
 	STATE[6].mintThisWeek  = Number(_mint[6])/1e18;	//chr
 
+	STATE[7].mintThisWeek  = Number(_mint[7])/1e18;	//pearl
 
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisWeekUSD = STATE[i].mintThisWeek * STATE[i].current_price; }
 
@@ -782,6 +806,7 @@ console.log(_cgd)
 		//vara : rebase  = ((vevelo.total/velo.total)^3)/2, team = 3%
 		ann_mint_calc( STATE[5].mintThisWeek, STATE[5].currentEpoch, 0.99 , 104, 0.99  ),// * (1 + ((STATE[5].veTotal/STATE[5].total_supply)**3)/2 + 30/1000  ),
 		ann_mint_calc( STATE[6].mintThisWeek, STATE[6].currentEpoch, 0.98 , 104, 0.99  ),	//chr
+		ann_mint_calc( STATE[7].mintThisWeek, STATE[7].currentEpoch, 0.99 , 104, 0.99  ),	//pearl
 	]);
 
 	for(let i=0;i<_k.length;i++) { STATE[i].mintThisYear = Number(_mint52[i]) / (i==0?1e18:1) ; }
@@ -862,7 +887,7 @@ async function paint_basics(s) {
 
 	for(let i=0; i< _k.length; i++) {
 		$("sr-sup-cir").innerHTML += `
-			<td class="DID_${i}">
+			<td id="sr-sup-cir-${i}" class="DID_${i}">
 				${ STATE[ i ].circulating_supply == null ? 0 : STATE[ i ].circulating_supply.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0}) }
 				${ STATE[ i ].symbol == null ? "tokens" : STATE[ i ].symbol.toUpperCase() }
 			</td>
@@ -1263,6 +1288,7 @@ async function paint_mint_dec() {
 		<td class="DID_${_k[4]}">-1.00%</td>
 		<td class="DID_${_k[5]}">-1.00%</td>
 		<td class="DID_${_k[6]}">-2.00%</td>
+		<td class="DID_${_k[7]}">-1.00%</td>
 	`;
 }
 
