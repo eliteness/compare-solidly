@@ -610,7 +610,7 @@ console.log(_cgd)
 		/// NOTE: `_cgd` indexes will change depending on alpabetical order of cg ids!!! MAKE SURE TO MAKE SURE THIS!!!!!
 		0:	( { ... { CSN: 0,	CSID: "CRV",	started: 1596672000 },	... _cgd[1],	desc: "All DEX pools"		} ),
 		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[6],	desc: "v1 + v2"				} ),
-		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "v1 DEX only"	} ),	///+ Equity (Perps)
+		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "DEX + Perps"	} ),	///+ Equity (Perps)
 		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5],	desc: "v1 + v2 (CL)"		} ),
 		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4],	desc: "v1 + v2 (CL)"		} ),
 		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678320000 },	... _cgd[3],	desc: "v1 DEX only"			} ),
@@ -648,7 +648,7 @@ console.log(_cgd)
 	_vol = await Promise.all([
 		fetch("https://api.llama.fi/summary/dexs/curve-dex?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/velodrome?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
-		fetch("https://api.llama.fi/summary/dexs/equalizer-exchange?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
+		fetch("https://api.llama.fi/summary/dexs/equalizer?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/thena?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/ramses-exchange?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
 		fetch("https://api.llama.fi/summary/dexs/equilibre?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyVolume"),
@@ -665,7 +665,7 @@ console.log(_cgd)
 	_fee = await Promise.all([
 		fetch("https://api.llama.fi/summary/fees/curve-dex?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/velodrome?dataType=dailyFees"),
-		fetch("https://api.llama.fi/summary/fees/equalizer-exchange?dataType=dailyFees"),
+		fetch("https://api.llama.fi/summary/fees/equalizer?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/thena?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/ramses-exchange?dataType=dailyFees"),
 		fetch("https://api.llama.fi/summary/fees/equilibre?dataType=dailyFees"),
