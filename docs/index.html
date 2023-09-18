@@ -620,8 +620,8 @@ console.log(_cgd)
 
 	//ramses supp:diluted hotfix
 	STATE[4].total_supply = (await (new ethers.Contract("0xaaa6c1e32c55a7bfa8066a6fae9b42650f262418",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
-	//ramses hotfix
-	//STATE[6].total_supply = (await (new ethers.Contract("0x15b2fb8f08e4ac1ce019eadae02ee92aedf06851",["function totalSupply() public view returns(uint256)"],ARBITRUM)).totalSupply())/1e18;
+	//vara hotfix
+	STATE[5].total_supply = (await (new ethers.Contract("0xE1da44C0dA55B075aE8E2e4b6986AdC76Ac77d73",["function totalSupply() public view returns(uint256)"],KAVA)).totalSupply())/1e18;
 
 
 	let _chr_sup = await Promise.all([
@@ -686,7 +686,9 @@ console.log(_cgd)
 	_ve_equal = new ethers.Contract("0x3a603eCEAE046828FEBBcbd097bF97Adc23DC072", [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"EQUAL","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"VOTER","outputs":[{"internalType":"contract IVoter","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_e","type":"address"}],"name":"addExcluded","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_o","type":"address"},{"internalType":"address","name":"_s","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_o","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"circulatingMarketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"circulatingSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"dilutedSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"excluded","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"fdv","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inExcluded","outputs":[{"internalType":"uint256","name":"_t","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inGauges","outputs":[{"internalType":"uint256","name":"_t","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"inNFT","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"info","outputs":[{"internalType":"uint256[15]","name":"","type":"uint256[15]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"liquidity","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lockRatio","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"lockedMarketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"marketCap","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"outstandingSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"pool2","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"price","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"n","type":"uint256"}],"name":"pullExcluded","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"pure","type":"function"},{"inputs":[],"name":"tGURU","outputs":[{"internalType":"contract ItGURU","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"veNFT","outputs":[{"internalType":"contract IveNFT","name":"","type":"address"}],"stateMutability":"view","type":"function"}], FANTOM);
 	_ve_the =	new ethers.Contract("0xfbbf371c9b0b994eebfcc977cef603f7f31c070d", veabi, BSC);
 	_ve_ram =	new ethers.Contract("0xAAA343032aA79eE9a6897Dab03bef967c3289a06", veabi, ARBITRUM);
+	_ram =	new ethers.Contract("0xaaa6c1e32c55a7bfa8066a6fae9b42650f262418", ["function balanceOf(address) public view returns(uint)"], ARBITRUM);
 	_ve_vara =	new ethers.Contract("0x35361C9c2a324F5FB8f3aed2d7bA91CE1410893A", veabi, KAVA);
+	_vara =		new ethers.Contract("0xE1da44C0dA55B075aE8E2e4b6986AdC76Ac77d73", ["function balanceOf(address) public view returns(uint)"], KAVA);
 	_ve_chr =	new ethers.Contract("0x9a01857f33aa382b1d5bb96c3180347862432b0d", veabi, ARBITRUM);
 
 	_veTotal = await Promise.all([
@@ -713,8 +715,8 @@ console.log(_cgd)
 		_ve_velo.supply(),
 		STATE[2].veLocked, //exception
 		_ve_the.supply(),
-		_ve_ram.supply(),
-		_ve_vara.supply(),
+		_ram.balanceOf(_ve_ram.address), //_ve_ram.supply(),
+		_vara.balanceOf(_ve_vara.address), //_ve_vara.supply(),
 		_ve_chr.supply(),
 	]);
 
