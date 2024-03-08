@@ -699,6 +699,8 @@ async function quote_vethe(_init_amt_vethe) {
 	]);
 	//console.log("_vethe_rd_final", _vethe_rd_final);
 
+	_vethe_rd_final[0] = await _vethe_rd_final[0].json();
+
 	return [
 		Number(_vethe_rd_final[0].outAmounts[0]) / 1e18,
 		_vethe_rd_final[1][1] / 1e18
