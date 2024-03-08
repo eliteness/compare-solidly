@@ -1,0 +1,761 @@
+<!doctype html>
+<meta charset="UTF-8">
+<head>
+<title>Measure Liquidity of Liquid Wrappers - eliteness.network/compare-wrappers</title>
+<meta name="description" content="Measure Liquidity of Liquid Wrappers - eliteness.network/compare-wrappers : Powered by Guru Network 🦾,🚀">
+<meta name="keywords" content="Comparision, Liquidity, Liquid Wrapper, Solidly, Dex, Forks">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="https://ftm.guru/icons/solidly.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+</head>
+<style>
+
+
+
+/*
+@font-face{font-family:bold;src: url(https://ftm.guru/font/bold.ttf);}
+@font-face{ font-family:italic;src: url(https://ftm.guru/font/italic.ttf);}
+@font-face{ font-family:light_italic;src: url(https://ftm.guru/font/light_italic.ttf);}
+@font-face{ font-family:regular;src: url(https://ftm.guru/font/regular.ttf);}
+@font-face{ font-family:regular_italic;src: url(https://ftm.guru/font/regular_italic.ttf);}
+*/
+@font-face{ font-family:light;src: url(https://ftm.guru/font/light.ttf);}
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+html{
+  background-size: 100%;
+  background-attachment: fixed;
+  color:#000;
+  /*text-shadow: 2px 2px 2px #000;*/
+  background-image: radial-gradient( #32CCBCa1, #90F7EC21);
+
+}
+* {
+  scroll-behavior: smooth !important;
+  font-family:'Inter', sans-serif;
+  transition: background-size 0.5s;
+}
+
+.faq {padding:5%}
+.faq a{color:aqua;text-decoration:none}
+.icons20 img{height: 20px }
+
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  overflow-y:  auto;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #192133;
+  color: #fff;
+  border-radius: 20px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #789;
+}
+.popup .close:hover {
+  color: #fff;
+  cursor:  context-menu
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+#social a img {
+  height: 24px;
+  margin:4px 4px 4px 0;
+}
+
+.subhead-small {
+  font-size:0.8em;
+  color:#999;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+#content1 a {
+  color: aqua;
+}
+
+#content1 u {
+  text-decoration: dashed underline aqua
+}
+
+table {
+  border-collapse: collapse;
+}
+table tbody tr td a {
+	text-decoration:none;
+	color:initial;
+}
+
+table thead tr th a {
+	color: #321;
+	text-decoration: 1px dashed #444 underline;
+}
+table thead  tr th {
+	text-align:center;
+	font-size:1em;
+}
+table thead tr th,
+table tbody tr td{
+	padding:10px;
+	width: 50px;
+	text-align:center;
+	min-width: 50px;
+}
+table tr th:first-child {
+	text-align:left;
+	width:150px;
+	min-width:150px;
+}
+
+.view {
+  margin: auto;
+  width: 100%;
+}
+
+.wrapper {
+  position: relative;
+  overflow: ;
+  white-space: nowrap;
+}
+
+.metricSubHead {
+  font-size: 0.5em;
+  color: #321;
+  font-style:  oblique;
+}
+
+.metricSub {
+  font-size: 0.8em;
+  color: #321;
+  font-style:  oblique;
+}
+
+#srt-header{
+  text-align: center;
+  position: sticky;
+  top:0;
+  position: -webkit-sticky;
+  display: flex;
+  z-index: 1;
+}
+
+#srt-header div {
+  width: 200px;
+  min-width: 200px;
+  font-size:1.5em;
+  padding:10px;
+  background:linear-gradient(to right, #d0f5f2, #BBFFF8, #d0f5f2);
+}
+
+#srt-header div:first-child {
+  width: 250px;
+  min-width: 250px;
+}
+
+@media(min-width:641px) {
+  /*
+  table tbody tr td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0px;
+    background: linear-gradient(to right, #d0f5f2, #90F7EC)
+  }
+  */
+}
+
+
+
+</style>
+<body>
+<div class="body" align="center">
+	<h1 style="font-family:;font-size:2.5em">
+		<img height="48px" style="position: relative;vertical-align: top;" id="" src="https://ftm.guru/icons/solidly.svg">  Wrapper Liquidity
+	</h1>
+	<h2>Comparision of the <span style="font-family:;color:#001337;text-shadow: 0px 0px 2px aqua;">Best Liquid Wrappers</span>!</h2>
+	<div align="center" style="font-family:;font-weight:ligher;color:#543543e3;margin-top:-5px;font-size:1.25em">eliteness.network/compare-wrappers</div>
+
+	<br><br><br>
+
+	<div class="view" style="display:none">
+		<div alig="center" id="srt-header">
+			<div>Metrics \ DEX</div>
+		</div>
+		<div class="wrapper">
+			<div class="wrapper-headers" id="wrapper-header">
+			</div>
+
+			<table align="center" id="stageTable">
+			</table>
+		</div>
+	</div>
+
+
+	<div>
+		<div>
+			<h2>
+				<img src="https://ftm.guru/icons/the.png" style="vertical-align:bottom;height:32px;">
+				veTHE (Thena.fi)
+			</h2>
+			<div style="overflow:auto">
+				<table align="center" id="">
+					<thead>
+						<tr>
+							<th>Liquid Wrapper</th>
+							<th>1</th>
+							<th>10</th>
+							<th>100</th>
+							<th>1000</th>
+							<th>10,000</th>
+							<th>100,000</th>
+							<th>1,000,000</th>
+							<th>10,000,000</th>
+							<th>100,000,000</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr id="tb-vethe-ethena">
+							<td>
+								<img src="https://ftm.guru/icons/ethena.png" style="vertical-align:bottom;height:24px;">
+								<a href="https://eliteness.network/ethena" target="_blank">eTHENA</a>
+								<br><span class="subhead-small"><a href="https://eliteness.network/ethena" target="_blank">Guru Network</a></span>
+							</td>
+						<tr>
+						<tr id="tb-vethe-livethe">
+							<td>
+								<img src="https://ftm.guru/icons/livethe.png" style="vertical-align:bottom;height:24px;">
+								<a href="https://www.liquiddriver.finance/livethe" target="_blank">liveTHE</a>
+								<br><span class="subhead-small"><a href="https://liquiddriver.finance" target="_blank">Liquid Driver</a></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<br>
+			<canvas id="ch_s2" style="width:80%;height:50vh;max-height:500px"></canvas>
+
+			<svg style="display:none" version="1.0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" height="200px" width="80vw" viewBox="0 0 240 100" class="chart">
+
+  				<polyline id="chart-vethe-livethe" fill="none" stroke="#0074d9" stroke-width="1" points=""/>
+  				<polyline id="chart-vethe-ethena" fill="none" stroke="#ff74d9" stroke-width="1" points=""/>
+
+				<line x1="0" x2="0" y1="0" y2="100"></line>
+				<line x1="150" x2="150" y1="0" y2="100"></line>
+				<text x="25" y="90">10</text>
+				<text x="25" y="90">10</text>
+				<text x="25" y="90">10</text>
+				<text x="25" y="90">10</text>
+				<text x="400" y="440" class="label-title">Year</text>
+
+				<text x="80" y="15">15</text>
+				<text x="80" y="131">10</text>
+				<text x="80" y="248">5</text>
+				<text x="80" y="373">0</text>
+				<text x="50" y="200" class="label-title">Price</text>
+
+
+			</svg>
+
+
+			<br>
+			<br>
+			How much can <input id="inp_vethe" placeholder="Amount of veTHE" value="100" style="width:100px;font-size:1.25em"> <b>veTHE</b> be sold instantly for?
+			<br>
+			<br>
+			<div style="font-size:1.25em">
+				<img src="https://ftm.guru/icons/ethena.png" style="vertical-align:bottom;height:24px;">
+				Via eTHENA : <span id="out_vethe_ethena">?</span> THE
+				<br>
+				<br>
+				<img src="https://ftm.guru/icons/livethe.png" style="vertical-align:bottom;height:24px;">
+				Via liveTHE : <span id="out_vethe_livethe">?</span> THE
+			</div>
+			<br>
+			<button onclick="dr()">Recheck</button>
+		</div>
+	</div>
+
+
+
+
+
+</div>
+
+<br><br>
+<br><br>
+<br><br>
+<br><br>
+Share this page for greater visibility and help us make the Data presented richer with your precious feedback!<br>
+Are we missing something interesting? Jump into our <a href="https://discord.gg/QpyfMarNrV" target="_blank">Discord</a> to help us with your suggestions.
+<br> 🦾,🚀
+
+<br><br><br><br>
+<br><br><br><br>
+<div style="color:#333;text-shadow:none;text-decoration:none;font-family:">
+	<a href="https://eliteness.network" style="color:#000;text-shadow:none;text-decoration:none;font-size:1.5em">eliteness.network</a>
+	<br>An Explorer for Guru Network products & services.
+	<div id="social">
+		<a href="https://twitter.com/ftm1337"><img src="https://ftm.guru/icons/twitter.svg"></a>
+		<a href="https://discord.gg/QpyfMarNrV"><img src="https://ftm.guru/icons/discord.svg"></a>
+		<a href="https://defillama.com/protocol/guru-network-dao"><img src="https://ftm.guru/icons/defillama.svg"></a>
+		<a href="https://defiwars.xyz/projects/gurunetwork"><img src="https://ftm.guru/icons/defiwars.svg"></a>
+		<a href="https://coinmarketcap.com/currencies/elite-1337"><img src="https://ftm.guru/icons/cmc.svg" style="background:#321;border-radius:5px;"></a>
+	</div>
+</div>
+<br><br>
+<div align="right">
+<a href="https://ftm.guru" style="color:#555;text-shadow:none;text-decoration:none;font-weight:bolder">Powered by Guru Network, CoinGecko, DefiLlama & various public blockchains & their valuable node service providers. 🦾</a>
+</div>
+</body>
+
+<script src="https://ftm.guru/ethers-5.2.umd.min.js"></script>
+<script src="https://ftm.guru/chart.min.js" type="application/javascript"></script>
+<script src="https://ftm.guru/chartjs-adapter-date-fns.bundle.min.js" type="application/javascript"></script>
+
+
+<script>
+
+STATE = {}
+
+////////////////////////////////////////////////////////////////
+
+
+function $(_) {console.log(_);return document.getElementById(_);}
+let provider= {};
+let signer= {};
+window.addEventListener('load',async function()
+{
+	console.log("waitin for 1.337 secs..");
+	//$("cw_m").innerHTML = "Connecting.. Please wait."
+	setTimeout(async () => { await basetrip();  arf() }, 1337);
+}, false);
+
+
+
+
+
+
+
+
+async function basetrip() {
+
+	ETHEREUM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/eth");
+	OPTIMISM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/optimism");
+	FANTOM = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/fantom");
+	BSC = new ethers.providers.JsonRpcProvider("https://rpc.ankr.com/bsc");
+	ARBITRUM = new ethers.providers.JsonRpcProvider("https://arbitrum.blockpi.network/v1/rpc/public");
+	KAVA = new ethers.providers.JsonRpcProvider("https://evm.kava.io");
+
+	cleanStage();
+
+	//dangerous recursion
+	try{
+		await dr();
+	} catch(e) {
+		console.log("dr: ",e);
+		await cleanStage();
+		notice(`<h2>Something went wrong...</h2>Please refresh the page!`);
+		//await basetrip();
+
+	}
+	//main reason is that ankr's arb1 rpc and kava rpc are extremely unreliable
+}
+
+
+
+
+function fornum3(n,d)
+{
+	_n=(Number(n)/10**Number(d));
+	n_=_n;
+	if(_n>1e18){n_=(_n/1e18).toFixed(2)+" Qt."}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+" Qd."}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+" Tn."}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+" Bn."}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+" Mn."}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+" Th."}
+	else if(_n>0){n_=(_n/1e0).toFixed(5)+""}
+	return(n_);
+}
+
+function fornum(n,d)
+{
+	_n=(Number(n)/10**Number(d));
+	n_=_n;
+	if(_n>1e18){n_=(_n/1e18).toFixed(3)+"Qt"}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(3)+"Qd"}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(3)+"T"}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(3)+"B"}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(3)+"M"}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(3)+"K"}
+	else if(_n>1e1){n_=(_n/1e0).toFixed(5)+""}
+	else if(_n>0.0){n_=(_n/1e0).toFixed(8)+""}
+	return(n_);
+}
+
+function fornum2(n,d)
+{
+	_n=(Number(n)/10**Number(d));
+	n_=_n;
+	if(_n>1e18){n_=(_n/1e18).toFixed(2)+" Quintillion"}
+	else if(_n>1e15){n_=(_n/1e15).toFixed(2)+" Quadrillion"}
+	else if(_n>1e12){n_=(_n/1e12).toFixed(2)+" Trillion"}
+	else if(_n>1e9){n_=(_n/1e9).toFixed(2)+" Billion"}
+	else if(_n>1e6){n_=(_n/1e6).toFixed(2)+" Million"}
+	else if(_n>1e3){n_=(_n/1e3).toFixed(2)+" Thousand"}
+	else if(_n>1){n_=(_n/1e0).toFixed(8)+""}
+	return(n_);
+}
+
+function notice(c) {
+	window.location = "#note";
+	$("content1").innerHTML = c;
+}
+
+
+
+function arf(){
+	//o = INITIAL; c=0;
+	var xfr = setInterval(
+		function(){
+			//c++
+		},
+		500
+	)
+}
+
+
+
+async function cleanStage() {
+
+}
+
+
+Chart.defaults.color="#345";
+function paint(el,da,na,la,hi,ld,fi) {
+
+	new Chart(el, {
+		type: "line",
+		data: {
+			labels: da[0].map(row => row.depth.toString()),
+			datasets: [
+          		{
+            		label: 'eTHENA',
+            		data: da[0].map(row => row.eTHENA),
+            		borderColor: '#d700d9'
+          		},
+          		{
+            		label: 'liveTHE',
+            		data: da[0].map(row => row.liveTHE),
+            		borderColor: '#004efc'
+          		}
+			]
+		},
+		options: {
+    		scales: {
+      			x: {
+        			display: true,
+        			title: {
+          				display: true,
+          				text: "Amounts of veTHE Sold",
+          				font: "bold",
+        				color: "#000"
+        			},
+            		/*
+            		type: 'time',
+                	time: {
+                		unit: 'day'
+                	}
+                	*/
+        		},
+        		y: {
+        			grid: {
+        				color: "rgba(0,0,0,0.1)"
+        			},
+        			//type: 'logarithmic',
+        			//min: 0.007
+        			title: {
+          				display: true,
+          				text: "Price per veTHE (in THE)",
+          				font: "bold",
+        				color: "#000"
+        			},
+        		}
+    		},
+    		interaction: {
+      			intersect: false,
+				mode: 'index'
+    		},
+    		plugins: {
+				title: {
+    				display: true,
+    				text: na,
+    				padding: {
+        				top: 10,
+        				bottom: 30
+    				},
+    				font: {
+    					size:20
+    				}
+    			},
+    			legend :{
+    				display: ld,
+    			},
+    			tooltip: {
+                	callbacks: {
+                    	label: function(context) {
+                        	let label = context.dataset.label || '';
+
+                        	if (label) {
+                            	label += ': ';
+                        	}
+                        	if (context.parsed.y !== null) {
+                            	label += fornum(context.parsed.y,0);
+                        	}
+                        	return label;
+                    	}
+                    }
+                }
+            },
+			animations: {/*
+				tension: {
+					duration: 10000,
+					easing: 'linear',
+					from: 1,
+					to: 0,
+					loop: false
+				}*/
+    		}
+    	}
+	});
+
+}
+
+
+
+async function dr() {
+	// STEP 0 : INITIALIZE
+	//cleanStage;return;
+	$("tb-vethe-ethena").innerHTML= `
+		<td>
+			<img src="https://ftm.guru/icons/ethena.png" style="vertical-align:bottom;height:24px;">
+			<a href="https://eliteness.network/ethena" target="_blank">eTHENA</a>
+			<br><span class="subhead-small"><a href="https://eliteness.network/ethena" target="_blank">Guru Network</a></span>
+		</td>
+	`;
+	$("tb-vethe-livethe").innerHTML= `
+		<td>
+			<img src="https://ftm.guru/icons/livethe.png" style="vertical-align:bottom;height:24px;">
+			<a href="https://www.liquiddriver.finance/livethe" target="_blank">liveTHE</a>
+			<br><span class="subhead-small"><a href="https://liquiddriver.finance" target="_blank">Liquid Driver</a></span>
+		</td>
+	`;
+
+	await paint_vethe( await quote_vethe( $("inp_vethe").value ) );
+
+	allquotes_vethe = await Promise.all([
+		quote_vethe(1e0),
+		quote_vethe(1e1),
+		quote_vethe(1e2),
+		quote_vethe(1e3),
+		quote_vethe(1e4),
+		quote_vethe(1e5),
+		quote_vethe(1e6),
+		quote_vethe(1e7),
+		quote_vethe(1e8),
+	]);
+
+	console.log(allquotes_vethe);
+
+
+	await paintall_vethe( allquotes_vethe );
+
+
+
+
+
+	return;
+
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+	//////////////////////////////////////////
+
+	// STEP 1 : initialize CoinGecko Data
+
+	let _cgd = await (await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=curve-dao-token%2Cvelodrome-finance%2Cthena%2Cchronos-finance%2Cramses-exchange%2Cequalizer-dex%2Cequilibre&order=id_asc&per_page=100&page=1&sparkline=false&price_change_percentage=30d&locale=en")).json();
+console.log(_cgd)
+	// we get an array ordered alphabetically by id
+	// remap it to The STATE object
+
+	//STARTS: MUST BE ROUNDED TO THURSDAY MIDNIGHTS (U.T.C.)
+
+	STATE = {
+		/// Order of Keys Matters in the STATE!
+		/// First Key means First Column, Last Key means Last Column!
+		/// We're simply using the order of their respective launch dates
+		/// NOTE: `_cgd` indexes will change depending on alpabetical order of cg ids!!! MAKE SURE TO MAKE SURE THIS!!!!!
+		0:	( { ... { CSN: 0,	CSID: "CRV",	started: 1596672000 },	... _cgd[1],	desc: "All DEX pools"		} ),
+		1:	( { ... { CSN: 1,	CSID: "VELO",	started: 1655337600 },	... _cgd[6],	desc: "v1 + v2"				} ),
+		2:	( { ... { CSN: 2,	CSID: "EQUAL",	started: 1668643200 },	... _cgd[2],	desc: "v1 DEX only"	} ),	///+ Equity (Perps)
+		3:	( { ... { CSN: 3,	CSID: "THE",	started: 1673481600 },	... _cgd[5],	desc: "v1 + v2 (CL)"		} ),
+		4:	( { ... { CSN: 4,	CSID: "RAM",	started: 1679529600 },	... _cgd[4],	desc: "v1 + v2 (CL)"		} ),
+		5:	( { ... { CSN: 5,	CSID: "VARA",	started: 1678320000 },	... _cgd[3],	desc: "v1 DEX only"			} ),
+		6:	( { ... { CSN: 6,	CSID: "CHR",	started: 1683072000 },	... _cgd[0],	desc: "v1 DEX only"			} ),
+		//... add others here as key=ticker & value=cgd[#]
+	};
+
+}
+
+
+async function quote_vethe(_init_amt_vethe) {
+
+	THE = "0xf4c8e32eadec4bfe97e0f595add0f4450a863a11";
+	WBNB = "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c";
+	ETHENA = "0xafbe3b8b0939a5538de32f7752a78e08c8492295";
+	LIVETHE = "0xcdc3a010a3473c0c4b2cb03d8489d6ba387b83cd";
+
+	_ethena_minter = new ethers.Contract("0x39e3ca118ddfea3edc426b306b87f43da3251b4a",["function price() public view returns(uint256)"],BSC);
+	_livethe_minter = new ethers.Contract("0xbede24890bfeb121c38e09a3a5b532fdb04ee385",["function getCurrentDepositFee() public view returns(uint256)"],BSC);
+
+	_thena_router = new ethers.Contract("0xd4ae6eca985340dd434d38f470accce4dc78d109",["function getAmountsOut(uint256,tuple(address from, address to, bool stable)[]) public view returns(uint256[])"],BSC);
+
+
+	_vethe_rd_fee = await Promise.all([
+		_ethena_minter.price(),
+		_livethe_minter.getCurrentDepositFee()
+	]);
+	//console.log("_vethe_rd_fee",_vethe_rd_fee);
+
+	_vethe_ethena2the = fetch(
+		"https://api.odos.xyz/sor/quote/v2",
+		{
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				chainId: 56,
+				inputTokens: [ { tokenAddress: ETHENA, amount: BigInt( Number(_init_amt_vethe) * 1e18 / ( _vethe_rd_fee[0] * 1e4 ) * 1e18 ).toString() } ],
+				outputTokens: [ { tokenAddress: THE, proportion: 1 } ],
+				userAddr: '0x167D87A906dA361A10061fe42bbe89451c2EE584',
+				slippageLimitPercent: 0.3,
+				referralCode: 0,
+				compact: true,
+			}),
+		}
+	);
+
+	_vethe_rd_final = await Promise.all([
+		/*
+		_thena_router.getAmountsOut(
+			BigInt( Number(_init_amt_vethe) * 1e18 / ( _vethe_rd_fee[0] * 1e4 ) * 1e18 ),
+			[
+				{from:ETHENA, to: WBNB, stable: false},
+				{from:WBNB, to: THE, stable: false},
+			]
+		)
+		*/
+		_vethe_ethena2the,
+		_thena_router.getAmountsOut(
+			BigInt( Number(_init_amt_vethe) * ( 1e3 - _vethe_rd_fee[1] )/1e3 * 1e18 ),
+			[
+				{from:LIVETHE, to: THE, stable: true}
+			]
+		),
+	]);
+	//console.log("_vethe_rd_final", _vethe_rd_final);
+
+	return [
+		Number(_vethe_rd_final[0].outAmounts[0]) / 1e18,
+		_vethe_rd_final[1][1] / 1e18
+	];
+}
+
+
+async function paint_vethe(_amts) {
+	$("out_vethe_ethena").innerHTML = (_amts[0]).toLocaleString();
+	$("out_vethe_livethe").innerHTML = (_amts[1]).toLocaleString();
+}
+
+async function paintall_vethe(_amts) {
+
+	console.log("paintall_ve(_amts)",_amts);
+	_clip_chart = 10;
+	pts_ethena = "";
+	pts_livethe = "";
+	cd_s = [[],[],[]];
+	for(i=0; i < _amts.length; i++) {
+		$("tb-vethe-ethena").innerHTML += `<td>${(_amts[i][0]).toFixed(i-2>0?0:3-i)}</td>`;
+		$("tb-vethe-livethe").innerHTML += `<td>${(_amts[i][1]).toFixed(i-2>0?0:3-i)}</td>`;
+
+		pts_ethena += `${ i*40 } ${ 100 - _amts[i][0] / 10**i * 100 } ${ i < _amts.length-1 ? "," : ""}` ;
+		pts_livethe += `${ i*40 } ${ 100 - _amts[i][1] / 10**i * 100 } ${ i < _amts.length-1 ? "," : ""}` ;
+
+		if(i < _clip_chart) cd_s[0].push({depth:(10**i).toString(), eTHENA:_amts[i][0] / 10**i, liveTHE:_amts[i][1] / 10**i});
+	}
+	//$("chart-vethe-ethena").setAttribute("points",pts_ethena);
+	//$("chart-vethe-livethe").setAttribute("points",pts_livethe);
+
+
+
+
+	paint("ch_s2", cd_s, "veTHE - Liquidity Depths", ["eTHENA", "liveTHE", ], [0,0,1], 1, [{t:'origin',a:'rgba(257, 127, 227,0)'},{t:'origin',a:'rgba(0, 155, 255,0)'},false])
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
